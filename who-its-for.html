@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who It's For - ClariView</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon-32.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-container"
+            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-md.png" alt="ClariView Logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="solution.html">Solution</a>
+                <a href="who-its-for.html" class="active">Who It's For</a>
+                <a href="about.html">About</a>
+                <a href="book-a-call.html" class="btn btn-outline" style="padding: 8px 16px;">Book a Conversation</a>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
+    <section class="section bg-alt text-center">
+        <div class="container fade-in">
+            <h1>Built for Leaders Managing Complexity</h1>
+            <p class="lead" style="max-width: 800px; margin: 0 auto;">
+                ClariView is designed for organisations where performance depends on multiple departments working in
+                sync.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-icon">⚽</div>
+                    <h3>Football & Sports Organisations</h3>
+                    <p>Clubs operate across football operations, commercial, hospitality, facilities and finance.</p>
+                    <p style="margin-top: 1rem;"><strong>Why ClariView?</strong> Provides one consolidated executive
+                        view to support smarter decisions at board and CEO level.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Multi-Department SMEs</h3>
+                    <p>If your business includes sales, operations, finance and delivery teams, alignment becomes
+                        critical as you grow.</p>
+                    <p style="margin-top: 1rem;"><strong>Why ClariView?</strong> Brings clarity without adding
+                        complexity.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏨</div>
+                    <h3>Hospitality & Venue Operators</h3>
+                    <p>Multiple revenue streams. Variable costs. Operational pressure.</p>
+                    <p style="margin-top: 1rem;"><strong>Why ClariView?</strong> Gives you a monthly view that actually
+                        reflects reality — not just a static profit figure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section text-center bg-alt">
+        <div class="container">
+            <h2>See How ClariView Fits Your Organisation</h2>
+            <p>If you fit one of these profiles, let's talk.</p>
+            <a href="book-a-call.html" class="btn btn-primary btn-lg" style="margin-top: 1rem;">Book a Conversation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ClariView. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

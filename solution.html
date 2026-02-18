@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Solution - ClariView</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon-32.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-container"
+            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-md.png" alt="ClariView Logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="solution.html" class="active">Solution</a>
+                <a href="who-its-for.html">Who It's For</a>
+                <a href="about.html">About</a>
+                <a href="book-a-call.html" class="btn btn-outline" style="padding: 8px 16px;">Book a Conversation</a>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
+    <section class="section text-center bg-alt">
+        <div class="container fade-in">
+            <h1>Executive Performance Infrastructure</h1>
+            <p class="lead" style="max-width: 800px; margin: 0 auto;">
+                ClariView is not another analytics tool.<br>
+                It’s a structured, leadership-focused performance system designed to simplify decision-making at the
+                top.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 3rem;">What You Receive</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Executive Dashboard</h3>
+                    <p>A clear, high-level overview of overall performance across the organisation.</p>
+                </div>
+                <div class="card">
+                    <h3>Financial Visibility</h3>
+                    <p>P&L tracking, budget comparisons, cost breakdowns and margin clarity.</p>
+                </div>
+                <div class="card">
+                    <h3>Department Alignment</h3>
+                    <p>Commercial, operations, delivery and finance — viewed together, not in isolation.</p>
+                </div>
+                <div class="card">
+                    <h3>Structured Reporting</h3>
+                    <p>Board-ready insights without days of manual preparation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-alt">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 3rem;">How It Works</h2>
+            <div class="grid grid-4" style="text-align: center;">
+                <div>
+                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">1</div>
+                    <p>We review your current reporting setup.</p>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">2</div>
+                    <p>We structure the data into a consistent format.</p>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">3</div>
+                    <p>We configure your executive dashboard.</p>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">4</div>
+                    <p>Your leadership team gains ongoing visibility and control.</p>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 4rem;">
+                <p>There’s no need for internal analysts or complex new systems.</p>
+                <p class="text-primary" style="font-weight: 600;">ClariView works alongside the tools you already use.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section text-center">
+        <div class="container">
+            <h2>Ready for Clarity?</h2>
+            <a href="book-a-call.html" class="btn btn-primary btn-lg" style="margin-top: 1rem;">Book a Conversation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ClariView. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
