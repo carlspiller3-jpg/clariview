@@ -369,11 +369,23 @@ footer p {
         margin-left: 0;
     }
 
-    /* .logo img { height: 50px; } */
-    /* Keep large logo */
+    /* Center Logo and Hamburger on Mobile */
+    header {
+        justify-content: space-between;
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+
+    .logo {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
 
     .mobile-menu-btn {
         display: block;
+        position: absolute;
+        right: var(--spacing-md);
     }
 
     /* Adjust hero for mobile */
