@@ -189,8 +189,8 @@ header .nav-links a.active {
 }
 
 .logo img {
-    height: 70px;
-    width: auto;
+    height: auto;
+    width: 150px;
 }
 
 /* Buttons */
