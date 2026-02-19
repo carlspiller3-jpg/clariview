@@ -340,17 +340,14 @@ footer p {
     }
 
     /* Header & Mobile Menu */
-    :root {
-        --header-height: 80px;
-    }
-
-    /* Smaller header on mobile */
+    /* :root { --header-height: 80px; } */
+    /* Keep large header */
 
     .nav-links {
         display: none;
         position: absolute;
-        top: 80px;
-        /* Match mobile header height */
+        top: 100px;
+        /* Match standard header height */
         left: 0;
         right: 0;
         background: var(--brand-dark);
@@ -372,10 +369,8 @@ footer p {
         margin-left: 0;
     }
 
-    .logo img {
-        height: 50px;
-        /* Smaller logo on mobile */
-    }
+    /* .logo img { height: 50px; } */
+    /* Keep large logo */
 
     .mobile-menu-btn {
         display: block;
