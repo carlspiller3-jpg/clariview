@@ -37,7 +37,7 @@
     --spacing-xl: 8rem;
 
     --container-width: 1200px;
-    --header-height: 80px;
+    --header-height: 100px;
 
     --radius-md: 8px;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -202,7 +202,7 @@ header .nav-links a.active {
 }
 
 .logo img {
-    height: 40px;
+    height: 70px;
     width: auto;
 }
 
