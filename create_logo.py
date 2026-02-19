@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 def create_logo():
     # Colors
-    bg_color = (26, 30, 57, 255)  # #1A1E39
+    bg_color = (33, 41, 59, 255)  # #21293B
     text_color = (249, 250, 250, 255) # #F9FAFA
     
     # Dimensions (High res)
