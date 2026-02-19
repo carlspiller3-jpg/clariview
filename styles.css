@@ -1,9 +1,9 @@
 :root {
     /* Brand Palette - Updated */
     --brand-dark: #21293B;
-    /* Main Background / "Background colour for the logo" */
+    /* Main Background */
     --brand-white: #F9FAFA;
-    /* Main Text / "same as font" */
+    /* Main Text */
     --brand-blue-1: #5798CA;
     /* Accent 1 */
     --brand-blue-2: #455972;
@@ -164,24 +164,10 @@ ul {
     grid-template-columns: repeat(4, 1fr);
 }
 
-@media (max-width: 768px) {
-
-    .grid-2,
-    .grid-3,
-    .grid-4 {
-        grid-template-columns: 1fr;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-}
-
 /* Header */
 header {
     height: var(--header-height);
     background-color: var(--brand-dark);
-    /* Changed to new brand dark */
     color: var(--brand-white);
     position: sticky;
     top: 0;
@@ -194,6 +180,7 @@ header {
 header .nav-links a {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
+    margin-left: var(--spacing-md);
 }
 
 header .nav-links a:hover,
@@ -251,7 +238,7 @@ header .nav-links a.active {
     color: var(--brand-dark);
 }
 
-/* Mobile Menu */
+/* Mobile Menu Button - Hidden by default */
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -259,17 +246,6 @@ header .nav-links a.active {
     font-size: 1.5rem;
     color: var(--brand-white);
     cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        background: var(--brand-dark);
-        /* Update mobile menu bg */
-    }
-
-    .mobile-menu-btn {
-        display: block;
-    }
 }
 
 /* Hero */
@@ -336,4 +312,78 @@ footer p {
 
 .fade-in {
     animation: fadeIn 0.8s ease-out forwards;
+}
+
+
+/* --- Mobile Optimization --- */
+@media (max-width: 768px) {
+
+    /* Layout */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Typography */
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    /* Spacing */
+    .section {
+        padding: var(--spacing-lg) 0;
+    }
+
+    /* Header & Mobile Menu */
+    :root {
+        --header-height: 80px;
+    }
+
+    /* Smaller header on mobile */
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        /* Match mobile header height */
+        left: 0;
+        right: 0;
+        background: var(--brand-dark);
+        flex-direction: column;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 1.1rem;
+        margin-left: 0;
+    }
+
+    .logo img {
+        height: 50px;
+        /* Smaller logo on mobile */
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    /* Adjust hero for mobile */
+    .hero {
+        padding: var(--spacing-lg) 0;
+        min-height: auto;
+    }
 }
