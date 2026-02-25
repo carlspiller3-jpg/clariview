@@ -454,9 +454,9 @@
             </div>
             <div id="profile-dd" class="dropdown-menu"
                 style="bottom: 100%; top: auto; left: 24px; width: calc(100% - 48px); margin-bottom: 8px;">
-                <div class="dropdown-item" onclick="switchView('Admin Settings')"><i data-lucide="shield"
+                <div class="dropdown-item" onclick="switchView('Admin Central')"><i data-lucide="shield"
                         style="width:14px; display:inline; margin-right:8px;"></i> Admin Central</div>
-                <div class="dropdown-item" onclick="showToast('Profile settings opened')"><i data-lucide="user"
+                <div class="dropdown-item" onclick="switchView('Account Details')"><i data-lucide="user"
                         style="width:14px; display:inline; margin-right:8px;"></i> Account Details</div>
                 <div style="height: 1px; background: var(--border-color); margin: 4px 0;"></div>
                 <div class="dropdown-item" style="color: #ef4444;" onclick="logout()"><i data-lucide="log-out"
@@ -963,7 +963,7 @@
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             if (view === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
             else if (view === 'Service Desk Trends') document.getElementById('view-trends').classList.add('active');
-            else if (view === 'Admin Settings') {
+            else if (view === 'Admin Central' || view === 'Account Details') {
                 // Switch to Settings Tab
                 const settingsItem = document.querySelector('.nav-item[data-tab="settings"]');
                 navItems.forEach(ni => ni.classList.remove('active'));
