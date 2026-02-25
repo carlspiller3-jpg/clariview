@@ -442,13 +442,26 @@
             <div class="nav-item" data-tab="schedule"><i data-lucide="calendar"></i> Schedule</div>
             <div class="nav-item" data-tab="support"><i data-lucide="help-circle"></i> Support</div>
         </nav>
-        <div class="user-profile">
-            <div class="avatar">DF</div>
-            <div style="flex: 1;">
-                <p style="font-size: 13px; font-weight: 600;">David Ferguson</p>
-                <p style="font-size: 11px; color: var(--text-muted);">Admin</p>
+        <div class="user-profile dropdown">
+            <div id="profile-trigger" style="display: flex; align-items: center; gap: 12px; width: 100%;"
+                onclick="toggleDropdown('profile-dd')">
+                <div class="avatar">DF</div>
+                <div style="flex: 1;">
+                    <p style="font-size: 13px; font-weight: 600;">David Ferguson</p>
+                    <p style="font-size: 11px; color: var(--text-muted);">Admin</p>
+                </div>
+                <i data-lucide="more-vertical" style="width: 14px; color: var(--text-muted);"></i>
             </div>
-            <i data-lucide="more-vertical" style="width: 14px; color: var(--text-muted);"></i>
+            <div id="profile-dd" class="dropdown-menu"
+                style="bottom: 100%; top: auto; left: 24px; width: calc(100% - 48px); margin-bottom: 8px;">
+                <div class="dropdown-item" onclick="switchView('Admin Settings')"><i data-lucide="shield"
+                        style="width:14px; display:inline; margin-right:8px;"></i> Admin Central</div>
+                <div class="dropdown-item" onclick="showToast('Profile settings opened')"><i data-lucide="user"
+                        style="width:14px; display:inline; margin-right:8px;"></i> Account Details</div>
+                <div style="height: 1px; background: var(--border-color); margin: 4px 0;"></div>
+                <div class="dropdown-item" style="color: #ef4444;" onclick="logout()"><i data-lucide="log-out"
+                        style="width:14px; display:inline; margin-right:8px;"></i> Log Out</div>
+            </div>
         </div>
     </aside>
 
@@ -944,17 +957,36 @@
         // VIEW LOGIC
         function switchView(view) {
             document.getElementById('title-dd').classList.remove('active');
+            document.getElementById('profile-dd').classList.remove('active');
             viewTitle.innerHTML = `${view} <i data-lucide="chevron-down" style="width: 16px;"></i>`;
 
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             if (view === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
             else if (view === 'Service Desk Trends') document.getElementById('view-trends').classList.add('active');
+            else if (view === 'Admin Settings') {
+                // Switch to Settings Tab
+                const settingsItem = document.querySelector('.nav-item[data-tab="settings"]');
+                navItems.forEach(ni => ni.classList.remove('active'));
+                settingsItem.classList.add('active');
+                contentSections.forEach(c => {
+                    c.classList.remove('active');
+                    if (c.id === 'settings-content') c.classList.add('active');
+                });
+                dashTitleDd.style.visibility = 'hidden';
+            }
             else document.getElementById('view-sales').classList.add('active');
 
             document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.classList.toggle('selected', item.innerText === view);
             });
-            showToast(`Dashboard: ${view}`);
+            showToast(`${view}`);
+        }
+
+        function logout() {
+            showToast('Logging out...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 800);
         }
 
         // FILTER LOGIC
