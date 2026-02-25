@@ -255,7 +255,7 @@
         }
 
         .filter-pill {
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
             background: #f9fafb;
@@ -265,10 +265,19 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
         .filter-pill:hover {
             border-color: var(--brand-accent);
+            background: white;
+        }
+
+        .filter-pill.active {
+            border-color: var(--brand-accent);
+            border-width: 1px;
+            background: white;
+            box-shadow: 0 0 0 1px var(--brand-accent);
         }
 
         .add-filter {
@@ -492,16 +501,22 @@
 
         <div class="filter-bar">
             <div class="filters-group">
-                <div class="filter-pill">Channel: All <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div class="filter-pill">Fault Type: All <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div class="filter-pill">Customer: All <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div class="filter-pill">Assignee: All <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div class="filter-pill add-filter"><i data-lucide="filter" style="width: 12px;"></i> Add Filter</div>
+                <div id="filter-channel" class="filter-pill" onclick="cycleFilter('channel')">Channel: <span
+                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
+                <div id="filter-fault" class="filter-pill" onclick="cycleFilter('fault')">Fault Type: <span
+                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
+                <div id="filter-customer" class="filter-pill" onclick="cycleFilter('customer')">Customer: <span
+                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
+                <div id="filter-assignee" class="filter-pill" onclick="cycleFilter('assignee')">Assignee: <span
+                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
+                <div class="filter-pill add-filter" onclick="showToast('Filter builder opened')"><i data-lucide="filter"
+                        style="width: 12px;"></i> Add Filter</div>
             </div>
             <div class="filters-group">
-                <button class="filter-pill">Saved Views <i data-lucide="chevron-down" style="width: 12px;"></i></button>
-                <button class="filter-pill">Save This View <i data-lucide="chevron-down"
-                        style="width: 12px;"></i></button>
+                <button class="filter-pill" onclick="showToast('Saved views list')">Saved Views <i
+                        data-lucide="chevron-down" style="width: 12px;"></i></button>
+                <button class="filter-pill" onclick="showToast('View saved successfully')">Save This View <i
+                        data-lucide="chevron-down" style="width: 12px;"></i></button>
             </div>
         </div>
 
@@ -511,35 +526,36 @@
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-label">Tickets Open Today</div>
-                        <div class="kpi-value">7</div>
+                        <div class="kpi-value" id="kpi-open">7</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Unresolved Tickets</div>
-                        <div class="kpi-value">14</div>
+                        <div class="kpi-value" id="kpi-unresolved">14</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Active SLA Violations</div>
-                        <div class="kpi-value">13</div>
+                        <div class="kpi-value" id="kpi-sla">13</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Total Active Tickets</div>
-                        <div class="kpi-value">569</div>
+                        <div class="kpi-value" id="kpi-total">569</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Avg Response Time (mins)</div>
-                        <div class="kpi-value" style="color:#6366f1">4.56</div>
+                        <div class="kpi-value" style="color:#6366f1" id="kpi-avg-resp">4.56</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Mean Time To Repair (mins)</div>
-                        <div class="kpi-value" style="color:#6366f1">149.34</div>
+                        <div class="kpi-value" style="color:#6366f1" id="kpi-mttr">149.34</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Backlog %</div>
-                        <div class="kpi-value" style="color:#6366f1">71%</div>
+                        <div class="kpi-value" style="color:#6366f1" id="kpi-backlog">71%</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Who has most open tickets?</div>
-                        <div class="kpi-value" style="color:#6366f1; font-size: 48px; padding-top: 10px;">Milhouse</div>
+                        <div class="kpi-value" style="color:#6366f1; font-size: 48px; padding-top: 10px;"
+                            id="kpi-top-rep">Milhouse</div>
                     </div>
                 </div>
                 <div class="charts-grid">
@@ -722,6 +738,52 @@
             });
         }
 
+        function cycleFilter(type) {
+            const pill = document.getElementById(`filter-${type}`);
+            const valSpan = pill.querySelector('.val');
+            const options = {
+                channel: ['All', 'Phone', 'Chat', 'Email', 'Social'],
+                fault: ['All', 'Hardware', 'Software', 'Network'],
+                customer: ['All', 'Enterprise', 'SMB', 'Tier 1'],
+                assignee: ['All', 'Milhouse', 'Bart', 'Lisa', 'Homer']
+            };
+
+            const current = valSpan.innerText;
+            const idx = options[type].indexOf(current);
+            const nextIdx = (idx + 1) % options[type].length;
+            const nextVal = options[type][nextIdx];
+
+            valSpan.innerText = nextVal;
+
+            if (nextVal !== 'All') {
+                pill.classList.add('active');
+            } else {
+                pill.classList.remove('active');
+            }
+
+            showToast(`Filtering by ${type}: ${nextVal}`);
+            updateDashboardData();
+        }
+
+        function updateDashboardData() {
+            // Simulate data change across all metrics
+            Object.values(charts).forEach(c => {
+                c.data.datasets.forEach(d => {
+                    d.data = d.data.map(v => Math.floor(v * (0.8 + Math.random() * 0.4)));
+                });
+                c.update();
+            });
+
+            // Update KPIs
+            document.getElementById('kpi-open').innerText = Math.floor(Math.random() * 15 + 5);
+            document.getElementById('kpi-unresolved').innerText = Math.floor(Math.random() * 20 + 10);
+            document.getElementById('kpi-sla').innerText = Math.floor(Math.random() * 10 + 5);
+            document.getElementById('kpi-total').innerText = Math.floor(Math.random() * 400 + 300);
+            document.getElementById('kpi-avg-resp').innerText = (Math.random() * 4 + 2).toFixed(2);
+            document.getElementById('kpi-mttr').innerText = (Math.random() * 100 + 100).toFixed(2);
+            document.getElementById('kpi-backlog').innerText = Math.floor(Math.random() * 30 + 50) + '%';
+        }
+
         function switchView(viewName) {
             const titleDd = document.getElementById('title-dd');
             titleDd.classList.remove('active');
@@ -746,12 +808,7 @@
 
         function refreshData() {
             showToast('Refreshing intelligence feeds...');
-            Object.values(charts).forEach(c => {
-                c.data.datasets.forEach(d => {
-                    d.data = d.data.map(v => Math.floor(v * (0.9 + Math.random() * 0.2)));
-                });
-                c.update();
-            });
+            updateDashboardData();
         }
 
         function showToast(msg) {
