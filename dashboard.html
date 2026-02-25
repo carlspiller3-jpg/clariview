@@ -288,6 +288,11 @@
         /* Content Body */
         .content-body {
             padding: 24px;
+            display: none;
+        }
+
+        .content-body.active {
+            display: block;
         }
 
         .view-section {
@@ -449,18 +454,18 @@
             <i data-lucide="layers" style="color: var(--brand-accent);"></i>
             <h2 style="font-family: 'Outfit', sans-serif; font-size: 20px;">clariview</h2>
         </div>
-        <nav>
+        <nav id="sidebar-nav">
             <div class="nav-label">Menu</div>
-            <div class="nav-item active"><i data-lucide="layout-dashboard"></i> Dashboard</div>
-            <div class="nav-item"><i data-lucide="folder"></i> Library</div>
-            <div class="nav-item"><i data-lucide="wrench"></i> Builder</div>
-            <div class="nav-item"><i data-lucide="component"></i> Architect</div>
+            <div class="nav-item active" data-tab="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</div>
+            <div class="nav-item" data-tab="library"><i data-lucide="folder"></i> Library</div>
+            <div class="nav-item" data-tab="builder"><i data-lucide="wrench"></i> Builder</div>
+            <div class="nav-item" data-tab="architect"><i data-lucide="component"></i> Architect</div>
 
             <div class="nav-label">More</div>
-            <div class="nav-item"><i data-lucide="settings"></i> Settings</div>
-            <div class="nav-item"><i data-lucide="calendar"></i> Schedule</div>
-            <div class="nav-item"><i data-lucide="help-circle"></i> Support</div>
-            <div class="nav-item"><i data-lucide="message-square"></i> Feedback</div>
+            <div class="nav-item" data-tab="settings"><i data-lucide="settings"></i> Settings</div>
+            <div class="nav-item" data-tab="schedule"><i data-lucide="calendar"></i> Schedule</div>
+            <div class="nav-item" data-tab="support"><i data-lucide="help-circle"></i> Support</div>
+            <div class="nav-item" data-tab="feedback"><i data-lucide="message-square"></i> Feedback</div>
         </nav>
         <div class="user-profile">
             <div class="avatar">DF</div>
@@ -476,7 +481,7 @@
         <header>
             <div class="header-left">
                 <i data-lucide="menu" class="sidebar-toggle"></i>
-                <div class="dropdown">
+                <div class="dropdown" id="dash-title-dropdown">
                     <div class="page-title" id="view-title" onclick="toggleDropdown('title-dd')">
                         Service Desk Status <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>
                     </div>
@@ -499,166 +504,208 @@
             </div>
         </header>
 
-        <div class="filter-bar">
-            <div class="filters-group">
-                <!-- Channel Filter -->
-                <div class="dropdown">
-                    <div id="filter-channel" class="filter-pill" onclick="toggleDropdown('filter-channel-dd')">
-                        Channel: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+        <div id="dashboard-content" class="content-body active">
+            <div class="filter-bar">
+                <div class="filters-group">
+                    <!-- Channel Filter -->
+                    <div class="dropdown">
+                        <div id="filter-channel" class="filter-pill" onclick="toggleDropdown('filter-channel-dd')">
+                            Channel: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
+                        </div>
+                        <div id="filter-channel-dd" class="dropdown-menu" style="left: 0;">
+                            <div class="dropdown-item selected" onclick="selectFilter('channel', 'All')">All</div>
+                            <div class="dropdown-item" onclick="selectFilter('channel', 'Phone')">Phone</div>
+                            <div class="dropdown-item" onclick="selectFilter('channel', 'Chat')">Chat</div>
+                            <div class="dropdown-item" onclick="selectFilter('channel', 'Email')">Email</div>
+                            <div class="dropdown-item" onclick="selectFilter('channel', 'Social')">Social</div>
+                        </div>
                     </div>
-                    <div id="filter-channel-dd" class="dropdown-menu" style="left: 0;">
-                        <div class="dropdown-item selected" onclick="selectFilter('channel', 'All')">All</div>
-                        <div class="dropdown-item" onclick="selectFilter('channel', 'Phone')">Phone</div>
-                        <div class="dropdown-item" onclick="selectFilter('channel', 'Chat')">Chat</div>
-                        <div class="dropdown-item" onclick="selectFilter('channel', 'Email')">Email</div>
-                        <div class="dropdown-item" onclick="selectFilter('channel', 'Social')">Social</div>
+
+                    <!-- Fault Type Filter -->
+                    <div class="dropdown">
+                        <div id="filter-fault" class="filter-pill" onclick="toggleDropdown('filter-fault-dd')">
+                            Fault Type: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
+                        </div>
+                        <div id="filter-fault-dd" class="dropdown-menu" style="left: 0;">
+                            <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All</div>
+                            <div class="dropdown-item" onclick="selectFilter('fault', 'Hardware')">Hardware</div>
+                            <div class="dropdown-item" onclick="selectFilter('fault', 'Software')">Software</div>
+                            <div class="dropdown-item" onclick="selectFilter('fault', 'Network')">Network</div>
+                            <div class="dropdown-item" onclick="selectFilter('fault', 'Power')">Power</div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Filter -->
+                    <div class="dropdown">
+                        <div id="filter-customer" class="filter-pill" onclick="toggleDropdown('filter-customer-dd')">
+                            Customer: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
+                        </div>
+                        <div id="filter-customer-dd" class="dropdown-menu" style="left: 0;">
+                            <div class="dropdown-item selected" onclick="selectFilter('customer', 'All')">All</div>
+                            <div class="dropdown-item" onclick="selectFilter('customer', 'Enterprise')">Enterprise</div>
+                            <div class="dropdown-item" onclick="selectFilter('customer', 'SMB')">SMB</div>
+                            <div class="dropdown-item" onclick="selectFilter('customer', 'Tier 1')">Tier 1</div>
+                            <div class="dropdown-item" onclick="selectFilter('customer', 'Public Sector')">Public Sector
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assignee Filter -->
+                    <div class="dropdown">
+                        <div id="filter-assignee" class="filter-pill" onclick="toggleDropdown('filter-assignee-dd')">
+                            Assignee: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
+                        </div>
+                        <div id="filter-assignee-dd" class="dropdown-menu" style="left: 0;">
+                            <div class="dropdown-item selected" onclick="selectFilter('assignee', 'All')">All</div>
+                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Milhouse')">Milhouse</div>
+                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Bart')">Bart</div>
+                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Lisa')">Lisa</div>
+                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Homer')">Homer</div>
+                        </div>
+                    </div>
+
+                    <div class="filter-pill add-filter" onclick="showToast('Filter builder opened')">
+                        <i data-lucide="filter" style="width: 12px;"></i> Add Filter
                     </div>
                 </div>
-
-                <!-- Fault Type Filter -->
-                <div class="dropdown">
-                    <div id="filter-fault" class="filter-pill" onclick="toggleDropdown('filter-fault-dd')">
-                        Fault Type: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
-                    </div>
-                    <div id="filter-fault-dd" class="dropdown-menu" style="left: 0;">
-                        <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All</div>
-                        <div class="dropdown-item" onclick="selectFilter('fault', 'Hardware')">Hardware</div>
-                        <div class="dropdown-item" onclick="selectFilter('fault', 'Software')">Software</div>
-                        <div class="dropdown-item" onclick="selectFilter('fault', 'Network')">Network</div>
-                        <div class="dropdown-item" onclick="selectFilter('fault', 'Power')">Power</div>
-                    </div>
+                <div class="filters-group">
+                    <button class="filter-pill" onclick="showToast('Saved views list')">Saved Views <i
+                            data-lucide="chevron-down" style="width: 12px;"></i></button>
+                    <button class="filter-pill" onclick="showToast('View saved successfully')">Save This View <i
+                            data-lucide="chevron-down" style="width: 12px;"></i></button>
                 </div>
+            </div>
 
-                <!-- Customer Filter -->
-                <div class="dropdown">
-                    <div id="filter-customer" class="filter-pill" onclick="toggleDropdown('filter-customer-dd')">
-                        Customer: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+            <div class="content-body active" style="padding: 0;">
+                <!-- SERVICE DESK STATUS -->
+                <div id="view-status" class="view-section active" style="padding: 24px;">
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Tickets Open Today</div>
+                            <div class="kpi-value" id="kpi-open">7</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Unresolved Tickets</div>
+                            <div class="kpi-value" id="kpi-unresolved">14</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Active SLA Violations</div>
+                            <div class="kpi-value" id="kpi-sla">13</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Total Active Tickets</div>
+                            <div class="kpi-value" id="kpi-total">569</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Avg Response Time (mins)</div>
+                            <div class="kpi-value" style="color:#6366f1" id="kpi-avg-resp">4.56</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Mean Time To Repair (mins)</div>
+                            <div class="kpi-value" style="color:#6366f1" id="kpi-mttr">149.34</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Backlog %</div>
+                            <div class="kpi-value" style="color:#6366f1" id="kpi-backlog">71%</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Who has most open tickets?</div>
+                            <div class="kpi-value" style="color:#6366f1; font-size: 48px; padding-top: 10px;"
+                                id="kpi-top-rep">Milhouse</div>
+                        </div>
                     </div>
-                    <div id="filter-customer-dd" class="dropdown-menu" style="left: 0;">
-                        <div class="dropdown-item selected" onclick="selectFilter('customer', 'All')">All</div>
-                        <div class="dropdown-item" onclick="selectFilter('customer', 'Enterprise')">Enterprise</div>
-                        <div class="dropdown-item" onclick="selectFilter('customer', 'SMB')">SMB</div>
-                        <div class="dropdown-item" onclick="selectFilter('customer', 'Tier 1')">Tier 1</div>
-                        <div class="dropdown-item" onclick="selectFilter('customer', 'Public Sector')">Public Sector
+                    <div class="charts-grid">
+                        <div class="card card-full">
+                            <div class="chart-container" style="height: 400px;"><canvas id="statusResChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Assignee Filter -->
-                <div class="dropdown">
-                    <div id="filter-assignee" class="filter-pill" onclick="toggleDropdown('filter-assignee-dd')">
-                        Assignee: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
-                    </div>
-                    <div id="filter-assignee-dd" class="dropdown-menu" style="left: 0;">
-                        <div class="dropdown-item selected" onclick="selectFilter('assignee', 'All')">All</div>
-                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Milhouse')">Milhouse</div>
-                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Bart')">Bart</div>
-                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Lisa')">Lisa</div>
-                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Homer')">Homer</div>
+                <!-- SERVICE DESK TRENDS -->
+                <div id="view-trends" class="view-section" style="padding: 24px;">
+                    <div class="charts-grid">
+                        <div class="card card-full">
+                            <div class="card-header">
+                                <h3 class="card-title">Tickets Last 30 Days</h3>
+                            </div>
+                            <div class="chart-container" style="height: 350px;"><canvas id="trendsLineChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card card-half">
+                            <div class="card-header">
+                                <h3 class="card-title">Tickets Status By Day of Week</h3>
+                            </div>
+                            <div class="chart-container" style="height: 250px;"><canvas id="trendsStatusChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card card-half">
+                            <div class="card-header">
+                                <h3 class="card-title">Resolution Time Histogram</h3>
+                            </div>
+                            <div class="chart-container" style="height: 250px;"><canvas id="trendsHistChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card card-third">
+                            <div class="card-header">
+                                <h3 class="card-title">Tickets by Channel</h3>
+                            </div>
+                            <div class="chart-container" style="height: 250px;"><canvas
+                                    id="trendsChannelChart"></canvas></div>
+                        </div>
+                        <div class="card card-third">
+                            <div class="card-header">
+                                <h3 class="card-title">Top 10 Tickets By Customer</h3>
+                            </div>
+                            <div class="chart-container" style="height: 250px;"><canvas
+                                    id="trendsCustomerChart"></canvas></div>
+                        </div>
+                        <div class="card card-third">
+                            <div class="card-header">
+                                <h3 class="card-title">Tickets by Fault Type</h3>
+                            </div>
+                            <div class="chart-container" style="height: 250px;"><canvas id="trendsFaultChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="filter-pill add-filter" onclick="showToast('Filter builder opened')">
-                    <i data-lucide="filter" style="width: 12px;"></i> Add Filter
-                </div>
-            </div>
-            <div class="filters-group">
-                <button class="filter-pill" onclick="showToast('Saved views list')">Saved Views <i
-                        data-lucide="chevron-down" style="width: 12px;"></i></button>
-                <button class="filter-pill" onclick="showToast('View saved successfully')">Save This View <i
-                        data-lucide="chevron-down" style="width: 12px;"></i></button>
             </div>
         </div>
 
-        <div class="content-body">
-            <!-- SERVICE DESK STATUS -->
-            <div id="view-status" class="view-section active">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-label">Tickets Open Today</div>
-                        <div class="kpi-value" id="kpi-open">7</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Unresolved Tickets</div>
-                        <div class="kpi-value" id="kpi-unresolved">14</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Active SLA Violations</div>
-                        <div class="kpi-value" id="kpi-sla">13</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Total Active Tickets</div>
-                        <div class="kpi-value" id="kpi-total">569</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Avg Response Time (mins)</div>
-                        <div class="kpi-value" style="color:#6366f1" id="kpi-avg-resp">4.56</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Mean Time To Repair (mins)</div>
-                        <div class="kpi-value" style="color:#6366f1" id="kpi-mttr">149.34</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Backlog %</div>
-                        <div class="kpi-value" style="color:#6366f1" id="kpi-backlog">71%</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Who has most open tickets?</div>
-                        <div class="kpi-value" style="color:#6366f1; font-size: 48px; padding-top: 10px;"
-                            id="kpi-top-rep">Milhouse</div>
-                    </div>
-                </div>
-                <div class="charts-grid">
-                    <div class="card card-full">
-                        <div class="chart-container" style="height: 400px;"><canvas id="statusResChart"></canvas></div>
-                    </div>
-                </div>
-            </div>
+        <!-- OTHER TAB CONTENTS -->
+        <div id="library-content" class="content-body"
+            style="background:white; margin:24px; border-radius:12px; padding:60px; text-align:center;">
+            <i data-lucide="folder-open"
+                style="width:48px; height:48px; color:var(--text-muted); margin-bottom:16px;"></i>
+            <h2>Digital Asset Library</h2>
+            <p style="color:var(--text-muted); margin-top:8px;">Access your shared documents, images, and reports.</p>
+        </div>
 
-            <!-- SERVICE DESK TRENDS -->
-            <div id="view-trends" class="view-section">
-                <div class="charts-grid">
-                    <div class="card card-full">
-                        <div class="card-header">
-                            <h3 class="card-title">Tickets Last 30 Days</h3>
-                        </div>
-                        <div class="chart-container" style="height: 350px;"><canvas id="trendsLineChart"></canvas></div>
-                    </div>
-                    <div class="card card-half">
-                        <div class="card-header">
-                            <h3 class="card-title">Tickets Status By Day of Week</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsStatusChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-half">
-                        <div class="card-header">
-                            <h3 class="card-title">Resolution Time Histogram</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsHistChart"></canvas></div>
-                    </div>
-                    <div class="card card-third">
-                        <div class="card-header">
-                            <h3 class="card-title">Tickets by Channel</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsChannelChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-third">
-                        <div class="card-header">
-                            <h3 class="card-title">Top 10 Tickets By Customer</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsCustomerChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-third">
-                        <div class="card-header">
-                            <h3 class="card-title">Tickets by Fault Type</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsFaultChart"></canvas>
-                        </div>
-                    </div>
+        <div id="builder-content" class="content-body"
+            style="background:white; margin:24px; border-radius:12px; padding:60px; text-align:center;">
+            <i data-lucide="wrench" style="width:48px; height:48px; color:var(--text-muted); margin-bottom:16px;"></i>
+            <h2>Widget Builder</h2>
+            <p style="color:var(--text-muted); margin-top:8px;">Design and customize new intelligence components.</p>
+        </div>
+
+        <div id="settings-content" class="content-body"
+            style="background:white; margin:24px; border-radius:12px; padding:40px;">
+            <h2 style="margin-bottom:24px;">Account Settings</h2>
+            <div style="display:flex; flex-direction:column; gap:20px; max-width:400px;">
+                <div style="display:flex; flex-direction:column; gap:8px;"><label
+                        style="font-size:12px; font-weight:700;">Full Name</label><input type="text"
+                        value="David Ferguson"
+                        style="padding:10px; border:1px solid var(--border-color); border-radius:8px;"></div>
+                <div style="display:flex; flex-direction:column; gap:8px;"><label
+                        style="font-size:12px; font-weight:700;">Email Address</label><input type="email"
+                        value="1@2.com" style="padding:10px; border:1px solid var(--border-color); border-radius:8px;">
                 </div>
+                <button class="btn-primary" style="width:fit-content;" onclick="showToast('Profile saved')">Save
+                    Changes</button>
             </div>
         </div>
     </main>
@@ -686,18 +733,8 @@
                 },
                 options: {
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: true }
-                    },
-                    scales: {
-                        y: {
-                            title: { display: true, text: 'Avg Resolution (mins)', font: { size: 10 } },
-                            min: 40, max: 160,
-                            grid: { color: '#f3f4f6' }
-                        },
-                        x: { grid: { display: false } }
-                    }
+                    plugins: { legend: { display: false } },
+                    scales: { y: { min: 40, max: 160, grid: { color: '#f3f4f6' } }, x: { grid: { display: false } } }
                 }
             });
 
@@ -713,11 +750,7 @@
                         { label: 'Closed', data: Array.from({ length: 30 }, () => Math.random() * 100 + 200), borderColor: '#3b82f6', tension: 0.1, pointRadius: 0 }
                     ]
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } },
-                    scales: { y: { beginAtZero: true, grid: { color: '#f3f4f6' } }, x: { grid: { display: false } } }
-                }
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 10 } } } }
             });
 
             // TRENDS STATUS DOW
@@ -725,18 +758,14 @@
             charts.trendsStatus = new Chart(trendsStatusCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                     datasets: [
                         { label: 'Closed', data: [800, 700, 650, 850, 950, 1000, 850], backgroundColor: '#3b82f6' },
                         { label: 'Resolved', data: [50, 40, 30, 40, 50, 60, 40], backgroundColor: '#22c55e' },
                         { label: 'Open', data: [30, 20, 25, 30, 35, 40, 30], backgroundColor: '#a855f7' }
                     ]
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#f3f4f6' } } },
-                    plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } }
-                }
+                options: { maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
             });
 
             // TRENDS HISTOGRAM
@@ -744,107 +773,85 @@
             charts.trendsHist = new Chart(trendsHistCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Less than 60 mins', '61-120 mins', '121-180 mins', 'Over 180 mins'],
-                    datasets: [{ label: '# of Tickets', data: [1800, 800, 900, 2200], backgroundColor: '#38bdf8' }]
+                    labels: ['<60m', '61-120m', '121-180m', '>180m'],
+                    datasets: [{ label: '# Tickets', data: [1800, 800, 900, 2200], backgroundColor: '#38bdf8' }]
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } },
-                    scales: { y: { beginAtZero: true, grid: { color: '#f3f4f6' } }, x: { grid: { display: false } } }
-                }
+                options: { maintainAspectRatio: false }
             });
 
-            // CHANNEL
+            // CHANNEL / CUSTOMER / FAULT
             const trendsChannelCtx = document.getElementById('trendsChannelChart').getContext('2d');
             charts.trendsChannel = new Chart(trendsChannelCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Phone Call', 'Chatbot', 'Email', 'USSD', 'WebForm', 'Social Media'],
-                    datasets: [{ label: '# of Tickets', data: [900, 850, 800, 950, 900, 1700], backgroundColor: '#38bdf8' }]
+                    labels: ['Phone', 'Chat', 'Email', 'USSD', 'Web', 'Social'],
+                    datasets: [{ data: [900, 850, 800, 950, 900, 1700], backgroundColor: '#38bdf8' }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } } }
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // CUSTOMER
             const trendsCustomerCtx = document.getElementById('trendsCustomerChart').getContext('2d');
             charts.trendsCustomer = new Chart(trendsCustomerCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Customer A', 'Customer B', 'Customer C', 'Customer D', 'Customer E', 'Customer F', 'Customer G'],
-                    datasets: [{ label: '# of Tickets', data: [600, 400, 350, 300, 250, 200, 180], backgroundColor: '#38bdf8' }]
+                    labels: ['Cust A', 'Cust B', 'Cust C', 'Cust D', 'Cust E', 'Cust F', 'Cust G'],
+                    datasets: [{ data: [600, 400, 350, 300, 250, 200, 180], backgroundColor: '#38bdf8' }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } } }
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // FAULT
             const trendsFaultCtx = document.getElementById('trendsFaultChart').getContext('2d');
             charts.trendsFault = new Chart(trendsFaultCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Hardware', 'Software', 'Network', 'Power', 'Human Error'],
-                    datasets: [{ label: '# of Tickets', data: [3000, 1500, 1000, 500, 200], backgroundColor: '#38bdf8' }]
+                    labels: ['HW', 'SW', 'Net', 'Pwr', 'Human'],
+                    datasets: [{ data: [3000, 1500, 1000, 500, 200], backgroundColor: '#38bdf8' }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } } }
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
         }
 
-        function toggleDropdown(id) {
-            // Close other dropdowns first
-            document.querySelectorAll('.dropdown-menu').forEach(m => {
-                if (m.id !== id) m.classList.remove('active');
-            });
-            document.getElementById(id).classList.toggle('active');
-        }
+        // SIDEBAR TAB LOGIC
+        const sidebarItems = document.querySelectorAll('.nav-item[data-tab]');
+        const contentBodies = document.querySelectorAll('.content-body');
+        const viewTitle = document.getElementById('view-title');
+        const dashTitleDd = document.getElementById('dash-title-dropdown');
 
-        function selectFilter(type, value) {
-            const pill = document.getElementById(`filter-${type}`);
-            const valSpan = pill.querySelector('.val');
-            const menu = document.getElementById(`filter-${type}-dd`);
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const tab = item.getAttribute('data-tab');
 
-            // Update UI
-            valSpan.innerText = value;
-            menu.classList.remove('active');
+                // Update active state
+                sidebarItems.forEach(ni => ni.classList.remove('active'));
+                item.classList.add('active');
 
-            // Handle active state styling
-            if (value !== 'All') {
-                pill.classList.add('active');
-            } else {
-                pill.classList.remove('active');
-            }
-
-            // Mark selected in dropdown
-            menu.querySelectorAll('.dropdown-item').forEach(item => {
-                item.classList.toggle('selected', item.innerText === value);
-            });
-
-            showToast(`Filtering by ${type}: ${value}`);
-            updateDashboardData();
-        }
-
-        function updateDashboardData() {
-            // Simulate data change across all metrics
-            Object.values(charts).forEach(c => {
-                c.data.datasets.forEach(d => {
-                    d.data = d.data.map(v => Math.floor(v * (0.8 + Math.random() * 0.4)));
+                // Toggle visibility
+                contentBodies.forEach(cb => {
+                    cb.classList.remove('active');
+                    if (cb.id === `${tab}-content`) cb.classList.add('active');
                 });
-                c.update();
+
+                // Update Header
+                const label = item.innerText.trim();
+                if (tab === 'dashboard') {
+                    dashTitleDd.style.display = 'block';
+                    viewTitle.innerHTML = `Service Desk Status <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>`;
+                    lucide.createIcons();
+                } else {
+                    dashTitleDd.style.display = 'block'; // Keep it but update content
+                    viewTitle.innerHTML = label;
+                    // Hide the sub-view dropdown components if not on dashboard
+                    document.getElementById('title-dd').classList.remove('active');
+                }
+
+                showToast(`Switched to ${label}`);
             });
+        });
 
-            // Update KPIs
-            document.getElementById('kpi-open').innerText = Math.floor(Math.random() * 15 + 5);
-            document.getElementById('kpi-unresolved').innerText = Math.floor(Math.random() * 20 + 10);
-            document.getElementById('kpi-sla').innerText = Math.floor(Math.random() * 10 + 5);
-            document.getElementById('kpi-total').innerText = Math.floor(Math.random() * 400 + 300);
-            document.getElementById('kpi-avg-resp').innerText = (Math.random() * 4 + 2).toFixed(2);
-            document.getElementById('kpi-mttr').innerText = (Math.random() * 100 + 100).toFixed(2);
-            document.getElementById('kpi-backlog').innerText = Math.floor(Math.random() * 30 + 50) + '%';
-        }
-
+        // DASHBOARD VIEW SWITCHER
         function switchView(viewName) {
-            const titleDd = document.getElementById('title-dd');
-            titleDd.classList.remove('active');
-
-            document.getElementById('view-title').innerHTML = `${viewName} <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>`;
+            document.getElementById('title-dd').classList.remove('active');
+            viewTitle.innerHTML = `${viewName} <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>`;
             lucide.createIcons();
 
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
@@ -854,8 +861,37 @@
             document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.classList.toggle('selected', item.innerText === viewName);
             });
+            showToast(`Dashboard: ${viewName}`);
+        }
 
-            showToast(`Switched to ${viewName}`);
+        // DROPDOWN LOGIC
+        function toggleDropdown(id) {
+            document.querySelectorAll('.dropdown-menu').forEach(m => {
+                if (m.id !== id) m.classList.remove('active');
+            });
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        function selectFilter(type, value) {
+            const pill = document.getElementById(`filter-${type}`);
+            const valSpan = pill.querySelector('.val');
+            valSpan.innerText = value;
+            document.getElementById(`filter-${type}-dd`).classList.remove('active');
+
+            value !== 'All' ? pill.classList.add('active') : pill.classList.remove('active');
+            updateDashboardData();
+            showToast(`${type} set to ${value}`);
+        }
+
+        function updateDashboardData() {
+            Object.values(charts).forEach(c => {
+                c.data.datasets.forEach(d => d.data = d.data.map(v => Math.floor(v * (0.8 + Math.random() * 0.4))));
+                c.update();
+            });
+            // Randomize KPIs
+            ['kpi-open', 'kpi-unresolved', 'kpi-sla', 'kpi-total'].forEach(id => {
+                document.getElementById(id).innerText = Math.floor(Math.random() * 50 + 5);
+            });
         }
 
         function refreshData() {
@@ -870,8 +906,8 @@
             setTimeout(() => t.classList.remove('active'), 3000);
         }
 
-        window.onclick = function (event) {
-            if (!event.target.closest('.dropdown')) {
+        window.onclick = function (e) {
+            if (!e.target.closest('.dropdown')) {
                 document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('active'));
             }
         }
