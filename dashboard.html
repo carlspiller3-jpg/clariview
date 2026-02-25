@@ -45,26 +45,24 @@
 
         /* Sidebar */
         .sidebar {
-            width: 240px;
+            width: 260px;
             background: white;
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            padding: 20px 0;
+            padding: 24px 0;
             position: fixed;
             height: 100vh;
             z-index: 100;
         }
 
         .logo-container {
-            padding: 0 20px 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 0 24px 32px;
         }
 
         .logo-container img {
             height: 32px;
+            display: block;
         }
 
         .nav-label {
@@ -73,20 +71,21 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: 16px 20px 8px;
+            padding: 16px 24px 8px;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 10px 20px;
+            padding: 12px 24px;
             color: var(--text-muted);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: 0.2s;
+            transition: all 0.2s;
             cursor: pointer;
             position: relative;
+            border-left: 3px solid transparent;
         }
 
         .nav-item i {
@@ -96,33 +95,24 @@
         }
 
         .nav-item:hover {
-            color: var(--brand-dark);
-            background: #f9fafb;
+            color: var(--brand-accent);
+            background: #f8fafc;
         }
 
         .nav-item.active {
-            color: white;
-            background: var(--brand-accent);
-        }
-
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            right: 20px;
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.6;
+            color: var(--brand-accent);
+            background: #f0f4ff;
+            border-left-color: var(--brand-accent);
+            font-weight: 600;
         }
 
         .user-profile {
             margin-top: auto;
-            padding: 16px 20px;
+            padding: 16px 24px;
             border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -132,23 +122,25 @@
         }
 
         .avatar {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: #e5e7eb;
+            background: var(--brand-accent);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            font-weight: 700;
+            font-size: 14px;
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            margin-left: 240px;
+            margin-left: 260px;
             display: flex;
             flex-direction: column;
-            width: calc(100% - 240px);
+            width: calc(100% - 260px);
         }
 
         header {
@@ -168,11 +160,6 @@
             display: flex;
             align-items: center;
             gap: 16px;
-        }
-
-        .sidebar-toggle {
-            cursor: pointer;
-            color: var(--text-muted);
         }
 
         .page-title {
@@ -207,12 +194,11 @@
         .btn-ghost:hover {
             background: #f3f4f6;
             color: var(--brand-dark);
-            border-color: var(--border-color);
         }
 
         .btn-outline {
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
             background: white;
             font-size: 13px;
@@ -275,14 +261,8 @@
 
         .filter-pill.active {
             border-color: var(--brand-accent);
-            border-width: 1px;
             background: white;
             box-shadow: 0 0 0 1px var(--brand-accent);
-        }
-
-        .add-filter {
-            color: var(--text-muted);
-            border-style: dashed;
         }
 
         /* Content Body */
@@ -322,10 +302,10 @@
         .kpi-label {
             font-size: 11px;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .kpi-value {
@@ -347,21 +327,22 @@
             background: white;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
-            padding: 16px;
+            padding: 20px;
         }
 
         .card-header {
             padding-bottom: 16px;
             border-bottom: 1px solid #f3f4f6;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .card-title {
             font-size: 14px;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--brand-dark);
         }
 
         .chart-container {
@@ -370,20 +351,16 @@
         }
 
         /* View-specific overrides */
-        #view-trends .card-full {
+        .card-full {
             grid-column: span 12;
         }
 
-        #view-trends .card-half {
+        .card-half {
             grid-column: span 6;
         }
 
-        #view-trends .card-third {
+        .card-third {
             grid-column: span 4;
-        }
-
-        #view-status .card-full {
-            grid-column: span 12;
         }
 
         /* Dropdowns */
@@ -394,7 +371,7 @@
         .dropdown-menu {
             position: absolute;
             top: calc(100% + 8px);
-            right: 0;
+            left: 0;
             background: white;
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -438,7 +415,7 @@
             font-size: 14px;
             font-weight: 500;
             transform: translateY(100px);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             z-index: 10000;
         }
 
@@ -451,21 +428,21 @@
 <body>
     <aside class="sidebar">
         <div class="logo-container">
-            <i data-lucide="layers" style="color: var(--brand-accent);"></i>
-            <h2 style="font-family: 'Outfit', sans-serif; font-size: 20px;">clariview</h2>
+            <a href="index.html">
+                <img src="assets/logo-xl-transparent.png" alt="ClariView Logo">
+            </a>
         </div>
         <nav id="sidebar-nav">
-            <div class="nav-label">Menu</div>
+            <div class="nav-label">Main</div>
             <div class="nav-item active" data-tab="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</div>
             <div class="nav-item" data-tab="library"><i data-lucide="folder"></i> Library</div>
             <div class="nav-item" data-tab="builder"><i data-lucide="wrench"></i> Builder</div>
             <div class="nav-item" data-tab="architect"><i data-lucide="component"></i> Architect</div>
 
-            <div class="nav-label">More</div>
+            <div class="nav-label">Account</div>
             <div class="nav-item" data-tab="settings"><i data-lucide="settings"></i> Settings</div>
             <div class="nav-item" data-tab="schedule"><i data-lucide="calendar"></i> Schedule</div>
             <div class="nav-item" data-tab="support"><i data-lucide="help-circle"></i> Support</div>
-            <div class="nav-item" data-tab="feedback"><i data-lucide="message-square"></i> Feedback</div>
         </nav>
         <div class="user-profile">
             <div class="avatar">DF</div>
@@ -473,239 +450,181 @@
                 <p style="font-size: 13px; font-weight: 600;">David Ferguson</p>
                 <p style="font-size: 11px; color: var(--text-muted);">Admin</p>
             </div>
-            <i data-lucide="chevron-up" style="width: 14px; color: var(--text-muted);"></i>
+            <i data-lucide="more-vertical" style="width: 14px; color: var(--text-muted);"></i>
         </div>
     </aside>
 
     <main class="main-content">
         <header>
             <div class="header-left">
-                <i data-lucide="menu" class="sidebar-toggle"></i>
                 <div class="dropdown" id="dash-title-dropdown">
                     <div class="page-title" id="view-title" onclick="toggleDropdown('title-dd')">
-                        Service Desk Status <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>
+                        Service Desk Status <i data-lucide="chevron-down" style="width: 16px;"></i>
                     </div>
-                    <div id="title-dd" class="dropdown-menu" style="left: 0;">
+                    <div id="title-dd" class="dropdown-menu">
                         <div class="dropdown-item selected" onclick="switchView('Service Desk Status')">Service Desk
                             Status</div>
                         <div class="dropdown-item" onclick="switchView('Service Desk Trends')">Service Desk Trends</div>
+                        <div class="dropdown-item" onclick="switchView('Sales Pipeline')">Sales Pipeline</div>
                     </div>
                 </div>
             </div>
             <div class="header-actions">
-                <div class="btn-ghost"><i data-lucide="edit-3" style="width: 18px;"></i></div>
                 <div class="btn-ghost" onclick="refreshData()"><i data-lucide="rotate-cw" style="width: 18px;"></i>
                 </div>
-                <div class="btn-ghost"><i data-lucide="printer" style="width: 18px;"></i></div>
-                <div class="btn-ghost"><i data-lucide="external-link" style="width: 18px;"></i></div>
-                <button class="btn-outline"><i data-lucide="star" style="width: 14px;"></i> Favorite</button>
-                <button class="btn-primary" onclick="showToast('Widget library opened')"><i data-lucide="plus"></i> Add
+                <div class="btn-ghost"><i data-lucide="settings" style="width: 18px;"></i></div>
+                <button class="btn-outline"><i data-lucide="share-2" style="width: 14px;"></i> Share</button>
+                <button class="btn-primary" onclick="showToast('Widget added')"><i data-lucide="plus"></i> New
                     Widget</button>
             </div>
         </header>
 
         <div id="dashboard-content" class="content-body active">
-            <div class="filter-bar">
+            <div class="filter-bar"
+                style="margin-bottom: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
                 <div class="filters-group">
-                    <!-- Channel Filter -->
                     <div class="dropdown">
                         <div id="filter-channel" class="filter-pill" onclick="toggleDropdown('filter-channel-dd')">
                             Channel: <span class="val">All</span> <i data-lucide="chevron-down"
                                 style="width: 12px;"></i>
                         </div>
-                        <div id="filter-channel-dd" class="dropdown-menu" style="left: 0;">
-                            <div class="dropdown-item selected" onclick="selectFilter('channel', 'All')">All</div>
+                        <div id="filter-channel-dd" class="dropdown-menu">
+                            <div class="dropdown-item selected" onclick="selectFilter('channel', 'All')">All Channels
+                            </div>
                             <div class="dropdown-item" onclick="selectFilter('channel', 'Phone')">Phone</div>
-                            <div class="dropdown-item" onclick="selectFilter('channel', 'Chat')">Chat</div>
                             <div class="dropdown-item" onclick="selectFilter('channel', 'Email')">Email</div>
-                            <div class="dropdown-item" onclick="selectFilter('channel', 'Social')">Social</div>
                         </div>
                     </div>
-
-                    <!-- Fault Type Filter -->
                     <div class="dropdown">
                         <div id="filter-fault" class="filter-pill" onclick="toggleDropdown('filter-fault-dd')">
-                            Fault Type: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
+                            Fault: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
                         </div>
-                        <div id="filter-fault-dd" class="dropdown-menu" style="left: 0;">
-                            <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All</div>
+                        <div id="filter-fault-dd" class="dropdown-menu">
+                            <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All Faults</div>
                             <div class="dropdown-item" onclick="selectFilter('fault', 'Hardware')">Hardware</div>
                             <div class="dropdown-item" onclick="selectFilter('fault', 'Software')">Software</div>
-                            <div class="dropdown-item" onclick="selectFilter('fault', 'Network')">Network</div>
-                            <div class="dropdown-item" onclick="selectFilter('fault', 'Power')">Power</div>
                         </div>
-                    </div>
-
-                    <!-- Customer Filter -->
-                    <div class="dropdown">
-                        <div id="filter-customer" class="filter-pill" onclick="toggleDropdown('filter-customer-dd')">
-                            Customer: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
-                        </div>
-                        <div id="filter-customer-dd" class="dropdown-menu" style="left: 0;">
-                            <div class="dropdown-item selected" onclick="selectFilter('customer', 'All')">All</div>
-                            <div class="dropdown-item" onclick="selectFilter('customer', 'Enterprise')">Enterprise</div>
-                            <div class="dropdown-item" onclick="selectFilter('customer', 'SMB')">SMB</div>
-                            <div class="dropdown-item" onclick="selectFilter('customer', 'Tier 1')">Tier 1</div>
-                            <div class="dropdown-item" onclick="selectFilter('customer', 'Public Sector')">Public Sector
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Assignee Filter -->
-                    <div class="dropdown">
-                        <div id="filter-assignee" class="filter-pill" onclick="toggleDropdown('filter-assignee-dd')">
-                            Assignee: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
-                        </div>
-                        <div id="filter-assignee-dd" class="dropdown-menu" style="left: 0;">
-                            <div class="dropdown-item selected" onclick="selectFilter('assignee', 'All')">All</div>
-                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Milhouse')">Milhouse</div>
-                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Bart')">Bart</div>
-                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Lisa')">Lisa</div>
-                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Homer')">Homer</div>
-                        </div>
-                    </div>
-
-                    <div class="filter-pill add-filter" onclick="showToast('Filter builder opened')">
-                        <i data-lucide="filter" style="width: 12px;"></i> Add Filter
                     </div>
                 </div>
                 <div class="filters-group">
-                    <button class="filter-pill" onclick="showToast('Saved views list')">Saved Views <i
-                            data-lucide="chevron-down" style="width: 12px;"></i></button>
-                    <button class="filter-pill" onclick="showToast('View saved successfully')">Save This View <i
-                            data-lucide="chevron-down" style="width: 12px;"></i></button>
+                    <button class="btn-outline" style="border: none; font-size: 12px;"><i data-lucide="filter"
+                            style="width:12px;"></i> More Filters</button>
                 </div>
             </div>
 
-            <div class="content-body active" style="padding: 0;">
-                <!-- SERVICE DESK STATUS -->
-                <div id="view-status" class="view-section active" style="padding: 24px;">
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <div class="kpi-label">Tickets Open Today</div>
-                            <div class="kpi-value" id="kpi-open">7</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Unresolved Tickets</div>
-                            <div class="kpi-value" id="kpi-unresolved">14</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Active SLA Violations</div>
-                            <div class="kpi-value" id="kpi-sla">13</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Total Active Tickets</div>
-                            <div class="kpi-value" id="kpi-total">569</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Avg Response Time (mins)</div>
-                            <div class="kpi-value" style="color:#6366f1" id="kpi-avg-resp">4.56</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Mean Time To Repair (mins)</div>
-                            <div class="kpi-value" style="color:#6366f1" id="kpi-mttr">149.34</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Backlog %</div>
-                            <div class="kpi-value" style="color:#6366f1" id="kpi-backlog">71%</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Who has most open tickets?</div>
-                            <div class="kpi-value" style="color:#6366f1; font-size: 48px; padding-top: 10px;"
-                                id="kpi-top-rep">Milhouse</div>
-                        </div>
+            <!-- STATUS VIEW -->
+            <div id="view-status" class="view-section active">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Tickets Open</div>
+                        <div class="kpi-value">14</div>
                     </div>
-                    <div class="charts-grid">
-                        <div class="card card-full">
-                            <div class="chart-container" style="height: 400px;"><canvas id="statusResChart"></canvas>
-                            </div>
-                        </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Unresolved</div>
+                        <div class="kpi-value">28</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">SLA Violations</div>
+                        <div class="kpi-value">7</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Active</div>
+                        <div class="kpi-value">512</div>
                     </div>
                 </div>
+                <div class="charts-grid">
+                    <div class="card card-full">
+                        <div class="card-header">
+                            <h3 class="card-title">Team Performance - Response Times</h3>
+                        </div>
+                        <div class="chart-container" style="height: 350px;"><canvas id="statusResChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
 
-                <!-- SERVICE DESK TRENDS -->
-                <div id="view-trends" class="view-section" style="padding: 24px;">
-                    <div class="charts-grid">
-                        <div class="card card-full">
-                            <div class="card-header">
-                                <h3 class="card-title">Tickets Last 30 Days</h3>
-                            </div>
-                            <div class="chart-container" style="height: 350px;"><canvas id="trendsLineChart"></canvas>
-                            </div>
+            <!-- TRENDS VIEW -->
+            <div id="view-trends" class="view-section">
+                <div class="charts-grid">
+                    <div class="card card-full">
+                        <div class="card-header">
+                            <h3 class="card-title">Volume Over Time (30 Days)</h3>
                         </div>
-                        <div class="card card-half">
-                            <div class="card-header">
-                                <h3 class="card-title">Tickets Status By Day of Week</h3>
-                            </div>
-                            <div class="chart-container" style="height: 250px;"><canvas id="trendsStatusChart"></canvas>
-                            </div>
+                        <div class="chart-container" style="height: 350px;"><canvas id="trendsLineChart"></canvas></div>
+                    </div>
+                    <div class="card card-half">
+                        <div class="card-header">
+                            <h3 class="card-title">Distribution by Day</h3>
                         </div>
-                        <div class="card card-half">
-                            <div class="card-header">
-                                <h3 class="card-title">Resolution Time Histogram</h3>
-                            </div>
-                            <div class="chart-container" style="height: 250px;"><canvas id="trendsHistChart"></canvas>
-                            </div>
+                        <div class="chart-container" style="height: 250px;"><canvas id="trendsStatusChart"></canvas>
                         </div>
-                        <div class="card card-third">
-                            <div class="card-header">
-                                <h3 class="card-title">Tickets by Channel</h3>
-                            </div>
-                            <div class="chart-container" style="height: 250px;"><canvas
-                                    id="trendsChannelChart"></canvas></div>
+                    </div>
+                    <div class="card card-half">
+                        <div class="card-header">
+                            <h3 class="card-title">Resolution Histogram</h3>
                         </div>
-                        <div class="card card-third">
-                            <div class="card-header">
-                                <h3 class="card-title">Top 10 Tickets By Customer</h3>
-                            </div>
-                            <div class="chart-container" style="height: 250px;"><canvas
-                                    id="trendsCustomerChart"></canvas></div>
+                        <div class="chart-container" style="height: 250px;"><canvas id="trendsHistChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SALES VIEW -->
+            <div id="view-sales" class="view-section">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">YTD Revenue</div>
+                        <div class="kpi-value">$2.4M</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Active Deals</div>
+                        <div class="kpi-value">142</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Win Rate</div>
+                        <div class="kpi-value">64%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Forecast</div>
+                        <div class="kpi-value">$1.1M</div>
+                    </div>
+                </div>
+                <div class="charts-grid">
+                    <div class="card card-full">
+                        <div class="card-header">
+                            <h3 class="card-title">Revenue By Rep - YTD</h3>
                         </div>
-                        <div class="card card-third">
-                            <div class="card-header">
-                                <h3 class="card-title">Tickets by Fault Type</h3>
-                            </div>
-                            <div class="chart-container" style="height: 250px;"><canvas id="trendsFaultChart"></canvas>
-                            </div>
-                        </div>
+                        <div class="chart-container" style="height: 350px;"><canvas id="salesRepChart"></canvas></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- OTHER TAB CONTENTS -->
-        <div id="library-content" class="content-body"
-            style="background:white; margin:24px; border-radius:12px; padding:60px; text-align:center;">
-            <i data-lucide="folder-open"
-                style="width:48px; height:48px; color:var(--text-muted); margin-bottom:16px;"></i>
-            <h2>Digital Asset Library</h2>
-            <p style="color:var(--text-muted); margin-top:8px;">Access your shared documents, images, and reports.</p>
-        </div>
-
-        <div id="builder-content" class="content-body"
-            style="background:white; margin:24px; border-radius:12px; padding:60px; text-align:center;">
-            <i data-lucide="wrench" style="width:48px; height:48px; color:var(--text-muted); margin-bottom:16px;"></i>
-            <h2>Widget Builder</h2>
-            <p style="color:var(--text-muted); margin-top:8px;">Design and customize new intelligence components.</p>
-        </div>
-
-        <div id="settings-content" class="content-body"
-            style="background:white; margin:24px; border-radius:12px; padding:40px;">
-            <h2 style="margin-bottom:24px;">Account Settings</h2>
-            <div style="display:flex; flex-direction:column; gap:20px; max-width:400px;">
-                <div style="display:flex; flex-direction:column; gap:8px;"><label
-                        style="font-size:12px; font-weight:700;">Full Name</label><input type="text"
-                        value="David Ferguson"
-                        style="padding:10px; border:1px solid var(--border-color); border-radius:8px;"></div>
-                <div style="display:flex; flex-direction:column; gap:8px;"><label
-                        style="font-size:12px; font-weight:700;">Email Address</label><input type="email"
-                        value="1@2.com" style="padding:10px; border:1px solid var(--border-color); border-radius:8px;">
+        <!-- OTHER TABS -->
+        <div id="library-content" class="content-body">
+            <div class="card card-full"
+                style="height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <i data-lucide="folder-open"
+                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
+                <h1 style="font-family: 'Outfit', sans-serif; font-size: 32px; margin-bottom: 12px;">Asset Library</h1>
+                <p style="color: var(--text-muted); max-width: 500px;">Access all your documents, reports, and media
+                    insights in one central repository.</p>
+                <div style="margin-top: 32px; display: flex; gap: 16px;">
+                    <button class="btn-primary"><i data-lucide="upload" style="width: 14px;"></i> Upload Files</button>
+                    <button class="btn-outline">Browse Recent</button>
                 </div>
-                <button class="btn-primary" style="width:fit-content;" onclick="showToast('Profile saved')">Save
-                    Changes</button>
+            </div>
+        </div>
+
+        <div id="builder-content" class="content-body">
+            <div class="card card-full"
+                style="height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <i data-lucide="wrench"
+                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
+                <h1 style="font-family: 'Outfit', sans-serif; font-size: 32px; margin-bottom: 12px;">Intelligence
+                    Builder</h1>
+                <p style="color: var(--text-muted); max-width: 500px;">Create custom logic, widgets, and data flows to
+                    power your dashboards.</p>
+                <button class="btn-primary" style="margin-top: 32px;"><i data-lucide="plus" style="width: 14px;"></i>
+                    Create New Widget</button>
             </div>
         </div>
     </main>
@@ -717,154 +636,84 @@
         let charts = {};
 
         function initCharts() {
-            // STATUS RESOLUTION CHART
-            const statusResCtx = document.getElementById('statusResChart').getContext('2d');
-            charts.statusRes = new Chart(statusResCtx, {
+            // STATUS
+            const statusCtx = document.getElementById('statusResChart').getContext('2d');
+            charts.status = new Chart(statusCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F', 'Team G'],
-                    datasets: [{
-                        label: 'Avg Resolution (mins)',
-                        data: [137, 143, 142, 151, 157, 154, 155],
-                        backgroundColor: '#38bdf8',
-                        borderRadius: 4,
-                        barThickness: 60
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { min: 40, max: 160, grid: { color: '#f3f4f6' } }, x: { grid: { display: false } } }
-                }
-            });
-
-            // TRENDS LINE CHART
-            const trendsLineCtx = document.getElementById('trendsLineChart').getContext('2d');
-            charts.trendsLine = new Chart(trendsLineCtx, {
-                type: 'line',
-                data: {
-                    labels: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
-                    datasets: [
-                        { label: 'Resolved', data: Array.from({ length: 30 }, () => Math.random() * 50 + 10), borderColor: '#ef4444', tension: 0.1, pointRadius: 0 },
-                        { label: 'Open', data: Array.from({ length: 30 }, () => Math.random() * 50 + 100), borderColor: '#22c55e', tension: 0.1, pointRadius: 0 },
-                        { label: 'Closed', data: Array.from({ length: 30 }, () => Math.random() * 100 + 200), borderColor: '#3b82f6', tension: 0.1, pointRadius: 0 }
-                    ]
-                },
-                options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 10 } } } }
-            });
-
-            // TRENDS STATUS DOW
-            const trendsStatusCtx = document.getElementById('trendsStatusChart').getContext('2d');
-            charts.trendsStatus = new Chart(trendsStatusCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                    datasets: [
-                        { label: 'Closed', data: [800, 700, 650, 850, 950, 1000, 850], backgroundColor: '#3b82f6' },
-                        { label: 'Resolved', data: [50, 40, 30, 40, 50, 60, 40], backgroundColor: '#22c55e' },
-                        { label: 'Open', data: [30, 20, 25, 30, 35, 40, 30], backgroundColor: '#a855f7' }
-                    ]
-                },
-                options: { maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
-            });
-
-            // TRENDS HISTOGRAM
-            const trendsHistCtx = document.getElementById('trendsHistChart').getContext('2d');
-            charts.trendsHist = new Chart(trendsHistCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['<60m', '61-120m', '121-180m', '>180m'],
-                    datasets: [{ label: '# Tickets', data: [1800, 800, 900, 2200], backgroundColor: '#38bdf8' }]
+                    labels: ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
+                    datasets: [{ label: 'Response Time (min)', data: [12, 19, 13, 15, 22], backgroundColor: '#4F46E5', borderRadius: 6 }]
                 },
                 options: { maintainAspectRatio: false }
             });
 
-            // CHANNEL / CUSTOMER / FAULT
-            const trendsChannelCtx = document.getElementById('trendsChannelChart').getContext('2d');
-            charts.trendsChannel = new Chart(trendsChannelCtx, {
-                type: 'bar',
+            // TRENDS
+            const trendsCtx = document.getElementById('trendsLineChart').getContext('2d');
+            charts.trendsLine = new Chart(trendsCtx, {
+                type: 'line',
                 data: {
-                    labels: ['Phone', 'Chat', 'Email', 'USSD', 'Web', 'Social'],
-                    datasets: [{ data: [900, 850, 800, 950, 900, 1700], backgroundColor: '#38bdf8' }]
+                    labels: Array.from({ length: 30 }, (_, i) => i + 1),
+                    datasets: [{ label: 'Volume', data: Array.from({ length: 30 }, () => Math.random() * 100), borderColor: '#4F46E5', tension: 0.4 }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { maintainAspectRatio: false }
             });
 
-            const trendsCustomerCtx = document.getElementById('trendsCustomerChart').getContext('2d');
-            charts.trendsCustomer = new Chart(trendsCustomerCtx, {
+            // SALES
+            const salesCtx = document.getElementById('salesRepChart').getContext('2d');
+            charts.sales = new Chart(salesCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Cust A', 'Cust B', 'Cust C', 'Cust D', 'Cust E', 'Cust F', 'Cust G'],
-                    datasets: [{ data: [600, 400, 350, 300, 250, 200, 180], backgroundColor: '#38bdf8' }]
+                    labels: ['John', 'Sarah', 'Mike', 'David', 'Emma'],
+                    datasets: [{ label: 'Revenue ($)', data: [450000, 620000, 380000, 510000, 740000], backgroundColor: '#10B981', borderRadius: 6 }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { indexAxis: 'y', maintainAspectRatio: false }
             });
 
-            const trendsFaultCtx = document.getElementById('trendsFaultChart').getContext('2d');
-            charts.trendsFault = new Chart(trendsFaultCtx, {
-                type: 'bar',
+            // Distributions
+            const distCtx = document.getElementById('trendsStatusChart').getContext('2d');
+            new Chart(distCtx, {
+                type: 'doughnut',
                 data: {
-                    labels: ['HW', 'SW', 'Net', 'Pwr', 'Human'],
-                    datasets: [{ data: [3000, 1500, 1000, 500, 200], backgroundColor: '#38bdf8' }]
+                    labels: ['Closed', 'Resolved', 'Open'],
+                    datasets: [{ data: [300, 50, 100], backgroundColor: ['#10B981', '#3B82F6', '#F59E0B'] }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { maintainAspectRatio: false }
             });
         }
 
-        // SIDEBAR TAB LOGIC
-        const sidebarItems = document.querySelectorAll('.nav-item[data-tab]');
-        const contentBodies = document.querySelectorAll('.content-body');
-        const viewTitle = document.getElementById('view-title');
-        const dashTitleDd = document.getElementById('dash-title-dropdown');
+        // TABS
+        const navItems = document.querySelectorAll('.nav-item');
+        const contents = document.querySelectorAll('.content-body');
 
-        sidebarItems.forEach(item => {
+        navItems.forEach(item => {
             item.addEventListener('click', () => {
                 const tab = item.getAttribute('data-tab');
-
-                // Update active state
-                sidebarItems.forEach(ni => ni.classList.remove('active'));
+                navItems.forEach(ni => ni.classList.remove('active'));
                 item.classList.add('active');
+                contents.forEach(c => c.classList.remove('active'));
+                document.getElementById(`${tab}-content`).classList.add('active');
 
-                // Toggle visibility
-                contentBodies.forEach(cb => {
-                    cb.classList.remove('active');
-                    if (cb.id === `${tab}-content`) cb.classList.add('active');
-                });
-
-                // Update Header
-                const label = item.innerText.trim();
-                if (tab === 'dashboard') {
-                    dashTitleDd.style.display = 'block';
-                    viewTitle.innerHTML = `Service Desk Status <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>`;
-                    lucide.createIcons();
+                // Header update
+                if (tab !== 'dashboard') {
+                    document.getElementById('dash-title-dropdown').style.visibility = 'hidden';
                 } else {
-                    dashTitleDd.style.display = 'block'; // Keep it but update content
-                    viewTitle.innerHTML = label;
-                    // Hide the sub-view dropdown components if not on dashboard
-                    document.getElementById('title-dd').classList.remove('active');
+                    document.getElementById('dash-title-dropdown').style.visibility = 'visible';
                 }
-
-                showToast(`Switched to ${label}`);
             });
         });
 
-        // DASHBOARD VIEW SWITCHER
-        function switchView(viewName) {
+        function switchView(view) {
             document.getElementById('title-dd').classList.remove('active');
-            viewTitle.innerHTML = `${viewName} <i data-lucide="chevron-down" style="width: 16px; margin-top: 2px;"></i>`;
-            lucide.createIcons();
+            document.getElementById('view-title').innerHTML = `${view} <i data-lucide="chevron-down" style="width: 16px;"></i>`;
 
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
-            if (viewName === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
-            else document.getElementById('view-trends').classList.add('active');
+            if (view === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
+            else if (view === 'Service Desk Trends') document.getElementById('view-trends').classList.add('active');
+            else document.getElementById('view-sales').classList.add('active');
 
-            document.querySelectorAll('.dropdown-item').forEach(item => {
-                item.classList.toggle('selected', item.innerText === viewName);
-            });
-            showToast(`Dashboard: ${viewName}`);
+            showToast(`Switched to ${view}`);
         }
 
-        // DROPDOWN LOGIC
         function toggleDropdown(id) {
             document.querySelectorAll('.dropdown-menu').forEach(m => {
                 if (m.id !== id) m.classList.remove('active');
@@ -872,31 +721,17 @@
             document.getElementById(id).classList.toggle('active');
         }
 
-        function selectFilter(type, value) {
+        function selectFilter(type, val) {
             const pill = document.getElementById(`filter-${type}`);
-            const valSpan = pill.querySelector('.val');
-            valSpan.innerText = value;
+            pill.querySelector('.val').innerText = val;
+            val !== 'All' ? pill.classList.add('active') : pill.classList.remove('active');
             document.getElementById(`filter-${type}-dd`).classList.remove('active');
-
-            value !== 'All' ? pill.classList.add('active') : pill.classList.remove('active');
-            updateDashboardData();
-            showToast(`${type} set to ${value}`);
-        }
-
-        function updateDashboardData() {
-            Object.values(charts).forEach(c => {
-                c.data.datasets.forEach(d => d.data = d.data.map(v => Math.floor(v * (0.8 + Math.random() * 0.4))));
-                c.update();
-            });
-            // Randomize KPIs
-            ['kpi-open', 'kpi-unresolved', 'kpi-sla', 'kpi-total'].forEach(id => {
-                document.getElementById(id).innerText = Math.floor(Math.random() * 50 + 5);
-            });
+            showToast(`Filter: ${val}`);
         }
 
         function refreshData() {
-            showToast('Refreshing intelligence feeds...');
-            updateDashboardData();
+            showToast('Data refreshed');
+            initCharts();
         }
 
         function showToast(msg) {
@@ -906,11 +741,11 @@
             setTimeout(() => t.classList.remove('active'), 3000);
         }
 
-        window.onclick = function (e) {
+        window.onclick = (e) => {
             if (!e.target.closest('.dropdown')) {
                 document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('active'));
             }
-        }
+        };
 
         window.onload = initCharts;
     </script>
