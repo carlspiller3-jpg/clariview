@@ -708,7 +708,14 @@
                     labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F', 'Team G'],
                     datasets: [{ label: 'Resolution Time', data: [137, 143, 142, 151, 157, 154, 155], backgroundColor: '#38bdf8', borderRadius: 4 }]
                 },
-                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { title: { display: true, text: 'Time (Minutes)', font: { weight: 'bold' } } },
+                        x: { title: { display: true, text: 'Department / Team', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // TRENDS LINE
@@ -723,7 +730,13 @@
                         { label: 'Closed', data: Array.from({ length: 30 }, () => Math.random() * 100 + 200), borderColor: '#3b82f6', tension: 0.3, pointRadius: 0 }
                     ]
                 },
-                options: { maintainAspectRatio: false }
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Volume (Tickets)', font: { weight: 'bold' } } },
+                        x: { title: { display: true, text: 'Day of Month', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // TRENDS DOW (Stacked Bar)
@@ -737,7 +750,13 @@
                         { label: 'Resolved', data: [50, 40, 30, 40, 50, 60, 40], backgroundColor: '#22c55e' }
                     ]
                 },
-                options: { maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, title: { display: true, text: 'Day of Week', font: { weight: 'bold' } } },
+                        y: { stacked: true, title: { display: true, text: 'Ticket Count', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // TRENDS HISTOGRAM
@@ -748,7 +767,13 @@
                     labels: ['<60m', '61-120m', '121-180m', '>180m'],
                     datasets: [{ label: '# Tickets', data: [1800, 800, 900, 2200], backgroundColor: '#38bdf8' }]
                 },
-                options: { maintainAspectRatio: false }
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Total Tickets', font: { weight: 'bold' } } },
+                        x: { title: { display: true, text: 'Resolution Window', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // TRENDS CHANNEL
@@ -759,7 +784,15 @@
                     labels: ['Phone', 'Chat', 'Email', 'Social'],
                     datasets: [{ data: [900, 850, 800, 1700], backgroundColor: '#38bdf8' }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Ticket Count', font: { weight: 'bold' } } },
+                        y: { title: { display: true, text: 'Support Channel', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // TRENDS CUSTOMER
@@ -770,7 +803,15 @@
                     labels: ['Cust A', 'Cust B', 'Cust C', 'Cust D', 'Cust E'],
                     datasets: [{ data: [600, 400, 350, 300, 250], backgroundColor: '#38bdf8' }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Active Tickets', font: { weight: 'bold' } } },
+                        y: { title: { display: true, text: 'Top Customers', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // TRENDS FAULT
@@ -781,7 +822,15 @@
                     labels: ['HW', 'SW', 'Net', 'Pwr', 'Other'],
                     datasets: [{ data: [3000, 1500, 1000, 500, 200], backgroundColor: '#38bdf8' }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Incident Volume', font: { weight: 'bold' } } },
+                        y: { title: { display: true, text: 'Fault Category', font: { weight: 'bold' } } }
+                    }
+                }
             });
 
             // SALES REP
@@ -792,7 +841,14 @@
                     labels: ['Team 1', 'Team 2', 'Team 3', 'Team 4', 'Team 5'],
                     datasets: [{ label: 'Revenue', data: [450000, 620000, 380000, 510000, 740000], backgroundColor: '#10B981', borderRadius: 6 }]
                 },
-                options: { indexAxis: 'y', maintainAspectRatio: false }
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: 'Revenue (USD)', font: { weight: 'bold' } } },
+                        y: { title: { display: true, text: 'Sales Region', font: { weight: 'bold' } } }
+                    }
+                }
             });
         }
 
