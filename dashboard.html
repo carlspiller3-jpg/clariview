@@ -120,10 +120,6 @@
             transition: 0.2s;
         }
 
-        .user-profile:hover {
-            background: #f9fafb;
-        }
-
         .avatar {
             width: 36px;
             height: 36px;
@@ -353,7 +349,6 @@
             width: 100%;
         }
 
-        /* View-specific overrides */
         .card-full {
             grid-column: span 12;
         }
@@ -432,7 +427,7 @@
     <aside class="sidebar">
         <div class="logo-container">
             <a href="index.html">
-                <img src="assets/logo-lg.png" alt="ClariView Logo" style="height: 60px;">
+                <img src="assets/logo-lg.png" alt="ClariView Logo">
             </a>
         </div>
         <nav id="sidebar-nav">
@@ -482,7 +477,9 @@
             </div>
         </header>
 
+        <!-- DASHBOARD CONTENT -->
         <div id="dashboard-content" class="content-body active">
+            <!-- COMMON FILTER BAR -->
             <div class="filter-bar"
                 style="margin-bottom: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
                 <div class="filters-group">
@@ -496,43 +493,88 @@
                             </div>
                             <div class="dropdown-item" onclick="selectFilter('channel', 'Phone')">Phone</div>
                             <div class="dropdown-item" onclick="selectFilter('channel', 'Email')">Email</div>
+                            <div class="dropdown-item" onclick="selectFilter('channel', 'Chat')">Chat</div>
                         </div>
                     </div>
                     <div class="dropdown">
                         <div id="filter-fault" class="filter-pill" onclick="toggleDropdown('filter-fault-dd')">
-                            Fault: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+                            Fault Type: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
                         </div>
                         <div id="filter-fault-dd" class="dropdown-menu">
                             <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All Faults</div>
                             <div class="dropdown-item" onclick="selectFilter('fault', 'Hardware')">Hardware</div>
                             <div class="dropdown-item" onclick="selectFilter('fault', 'Software')">Software</div>
+                            <div class="dropdown-item" onclick="selectFilter('fault', 'Network')">Network</div>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <div id="filter-customer" class="filter-pill" onclick="toggleDropdown('filter-customer-dd')">
+                            Customer: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
+                        </div>
+                        <div id="filter-customer-dd" class="dropdown-menu">
+                            <div class="dropdown-item selected" onclick="selectFilter('customer', 'All')">All Customers
+                            </div>
+                            <div class="dropdown-item" onclick="selectFilter('customer', 'Enterprise')">Enterprise</div>
+                            <div class="dropdown-item" onclick="selectFilter('customer', 'SMB')">SMB</div>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <div id="filter-assignee" class="filter-pill" onclick="toggleDropdown('filter-assignee-dd')">
+                            Assignee: <span class="val">All</span> <i data-lucide="chevron-down"
+                                style="width: 12px;"></i>
+                        </div>
+                        <div id="filter-assignee-dd" class="dropdown-menu">
+                            <div class="dropdown-item selected" onclick="selectFilter('assignee', 'All')">All Assignees
+                            </div>
+                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Milhouse')">Milhouse</div>
+                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Bart')">Bart</div>
                         </div>
                     </div>
                 </div>
                 <div class="filters-group">
                     <button class="btn-outline" style="border: none; font-size: 12px;"><i data-lucide="filter"
                             style="width:12px;"></i> More Filters</button>
+                    <button class="btn-ghost" onclick="showToast('Weekly view selected')">Weekly View</button>
+                    <button class="btn-ghost" onclick="showToast('Reviews opened')">Reviews</button>
                 </div>
             </div>
 
-            <!-- STATUS VIEW -->
+            <!-- VIEW: SERVICE DESK STATUS (8 KPIs) -->
             <div id="view-status" class="view-section active">
-                <div class="kpi-grid">
+                <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr);">
                     <div class="kpi-card">
-                        <div class="kpi-label">Tickets Open</div>
-                        <div class="kpi-value">14</div>
+                        <div class="kpi-label">Tickets Open Today</div>
+                        <div class="kpi-value" id="kpi-open">7</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-label">Unresolved</div>
-                        <div class="kpi-value">28</div>
+                        <div class="kpi-label">Unresolved Tickets</div>
+                        <div class="kpi-value" id="kpi-unresolved">14</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-label">SLA Violations</div>
-                        <div class="kpi-value">7</div>
+                        <div class="kpi-label">Active SLA Violations</div>
+                        <div class="kpi-value" id="kpi-sla">13</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-label">Total Active</div>
-                        <div class="kpi-value">512</div>
+                        <div class="kpi-label">Total Active Tickets</div>
+                        <div class="kpi-value" id="kpi-total">569</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Avg Response Time</div>
+                        <div class="kpi-value" style="color:#6366f1">4.56</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Mean Time To Repair</div>
+                        <div class="kpi-value" style="color:#6366f1">149.34</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Backlog %</div>
+                        <div class="kpi-value" style="color:#6366f1">71%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Most Open Tickets</div>
+                        <div class="kpi-value" style="color:#6366f1; font-size: 32px; padding-top: 15px;">Milhouse</div>
                     </div>
                 </div>
                 <div class="charts-grid">
@@ -540,37 +582,58 @@
                         <div class="card-header">
                             <h3 class="card-title">Team Performance - Response Times</h3>
                         </div>
-                        <div class="chart-container" style="height: 350px;"><canvas id="statusResChart"></canvas></div>
+                        <div class="chart-container" style="height: 400px;"><canvas id="statusResChart"></canvas></div>
                     </div>
                 </div>
             </div>
 
-            <!-- TRENDS VIEW -->
+            <!-- VIEW: SERVICE DESK TRENDS (6 Charts) -->
             <div id="view-trends" class="view-section">
                 <div class="charts-grid">
                     <div class="card card-full">
                         <div class="card-header">
-                            <h3 class="card-title">Volume Over Time (30 Days)</h3>
+                            <h3 class="card-title">Tickets Last 30 Days</h3>
                         </div>
                         <div class="chart-container" style="height: 350px;"><canvas id="trendsLineChart"></canvas></div>
                     </div>
                     <div class="card card-half">
                         <div class="card-header">
-                            <h3 class="card-title">Distribution by Day</h3>
+                            <h3 class="card-title">Status By Day of Week</h3>
                         </div>
                         <div class="chart-container" style="height: 250px;"><canvas id="trendsStatusChart"></canvas>
                         </div>
                     </div>
                     <div class="card card-half">
                         <div class="card-header">
-                            <h3 class="card-title">Resolution Histogram</h3>
+                            <h3 class="card-title">Resolution Time Histogram</h3>
                         </div>
                         <div class="chart-container" style="height: 250px;"><canvas id="trendsHistChart"></canvas></div>
+                    </div>
+                    <div class="card card-third">
+                        <div class="card-header">
+                            <h3 class="card-title">Tickets by Channel</h3>
+                        </div>
+                        <div class="chart-container" style="height: 250px;"><canvas id="trendsChannelChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card card-third">
+                        <div class="card-header">
+                            <h3 class="card-title">Top 10 Customers</h3>
+                        </div>
+                        <div class="chart-container" style="height: 250px;"><canvas id="trendsCustomerChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card card-third">
+                        <div class="card-header">
+                            <h3 class="card-title">Fault Types</h3>
+                        </div>
+                        <div class="chart-container" style="height: 250px;"><canvas id="trendsFaultChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SALES VIEW -->
+            <!-- VIEW: SALES PIPELINE -->
             <div id="view-sales" class="view-section">
                 <div class="kpi-grid">
                     <div class="kpi-card">
@@ -586,8 +649,8 @@
                         <div class="kpi-value">64%</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-label">Forecast</div>
-                        <div class="kpi-value">$1.1M</div>
+                        <div class="kpi-label">Qualified Leads</div>
+                        <div class="kpi-value">891</div>
                     </div>
                 </div>
                 <div class="charts-grid">
@@ -595,39 +658,37 @@
                         <div class="card-header">
                             <h3 class="card-title">Revenue By Rep - YTD</h3>
                         </div>
-                        <div class="chart-container" style="height: 350px;"><canvas id="salesRepChart"></canvas></div>
+                        <div class="chart-container" style="height: 400px;"><canvas id="salesRepChart"></canvas></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- OTHER TABS -->
-        <div id="library-content" class="content-body">
-            <div class="card card-full"
-                style="height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <!-- OTHER CONTENT SECTIONS -->
+        <div id="library-content" class="content-body" style="padding: 0;">
+            <div
+                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
                 <i data-lucide="folder-open"
                     style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: 'Outfit', sans-serif; font-size: 32px; margin-bottom: 12px;">Asset Library</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Access all your documents, reports, and media
-                    insights in one central repository.</p>
+                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Asset Library</h1>
+                <p style="color: var(--text-muted); max-width: 500px;">Manage and view your organization's collective
+                    intelligence documents.</p>
                 <div style="margin-top: 32px; display: flex; gap: 16px;">
-                    <button class="btn-primary"><i data-lucide="upload" style="width: 14px;"></i> Upload Files</button>
-                    <button class="btn-outline">Browse Recent</button>
+                    <button class="btn-primary">Upload Documentation</button>
+                    <button class="btn-outline">View Recent</button>
                 </div>
             </div>
         </div>
 
-        <div id="builder-content" class="content-body">
-            <div class="card card-full"
-                style="height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <div id="builder-content" class="content-body" style="padding: 0;">
+            <div
+                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
                 <i data-lucide="wrench"
                     style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: 'Outfit', sans-serif; font-size: 32px; margin-bottom: 12px;">Intelligence
-                    Builder</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Create custom logic, widgets, and data flows to
-                    power your dashboards.</p>
-                <button class="btn-primary" style="margin-top: 32px;"><i data-lucide="plus" style="width: 14px;"></i>
-                    Create New Widget</button>
+                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Widget Builder</h1>
+                <p style="color: var(--text-muted); max-width: 500px;">Craft new data visualizations and logic modules
+                    for your workspace.</p>
+                <button class="btn-primary" style="margin-top: 32px;">Launch Component Studio</button>
             </div>
         </div>
     </main>
@@ -639,82 +700,159 @@
         let charts = {};
 
         function initCharts() {
-            // STATUS
+            // STATUS RESOLUTION
             const statusCtx = document.getElementById('statusResChart').getContext('2d');
             charts.status = new Chart(statusCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
-                    datasets: [{ label: 'Response Time (min)', data: [12, 19, 13, 15, 22], backgroundColor: '#4F46E5', borderRadius: 6 }]
+                    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F', 'Team G'],
+                    datasets: [{ label: 'Resolution Time', data: [137, 143, 142, 151, 157, 154, 155], backgroundColor: '#38bdf8', borderRadius: 4 }]
                 },
-                options: { maintainAspectRatio: false }
+                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // TRENDS
-            const trendsCtx = document.getElementById('trendsLineChart').getContext('2d');
-            charts.trendsLine = new Chart(trendsCtx, {
+            // TRENDS LINE
+            const trendsLineCtx = document.getElementById('trendsLineChart').getContext('2d');
+            charts.trendsLine = new Chart(trendsLineCtx, {
                 type: 'line',
                 data: {
                     labels: Array.from({ length: 30 }, (_, i) => i + 1),
-                    datasets: [{ label: 'Volume', data: Array.from({ length: 30 }, () => Math.random() * 100), borderColor: '#4F46E5', tension: 0.4 }]
+                    datasets: [
+                        { label: 'Resolved', data: Array.from({ length: 30 }, () => Math.random() * 50 + 10), borderColor: '#ef4444', tension: 0.3, pointRadius: 0 },
+                        { label: 'Open', data: Array.from({ length: 30 }, () => Math.random() * 50 + 100), borderColor: '#22c55e', tension: 0.3, pointRadius: 0 },
+                        { label: 'Closed', data: Array.from({ length: 30 }, () => Math.random() * 100 + 200), borderColor: '#3b82f6', tension: 0.3, pointRadius: 0 }
+                    ]
                 },
                 options: { maintainAspectRatio: false }
             });
 
-            // SALES
-            const salesCtx = document.getElementById('salesRepChart').getContext('2d');
-            charts.sales = new Chart(salesCtx, {
+            // TRENDS DOW (Stacked Bar)
+            const dowCtx = document.getElementById('trendsStatusChart').getContext('2d');
+            charts.trendsStatus = new Chart(dowCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['John', 'Sarah', 'Mike', 'David', 'Emma'],
-                    datasets: [{ label: 'Revenue ($)', data: [450000, 620000, 380000, 510000, 740000], backgroundColor: '#10B981', borderRadius: 6 }]
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [
+                        { label: 'Closed', data: [800, 700, 650, 850, 950, 1000, 850], backgroundColor: '#3b82f6' },
+                        { label: 'Resolved', data: [50, 40, 30, 40, 50, 60, 40], backgroundColor: '#22c55e' }
+                    ]
+                },
+                options: { maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+            });
+
+            // TRENDS HISTOGRAM
+            const histCtx = document.getElementById('trendsHistChart').getContext('2d');
+            charts.trendsHist = new Chart(histCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['<60m', '61-120m', '121-180m', '>180m'],
+                    datasets: [{ label: '# Tickets', data: [1800, 800, 900, 2200], backgroundColor: '#38bdf8' }]
+                },
+                options: { maintainAspectRatio: false }
+            });
+
+            // TRENDS CHANNEL
+            const channelCtx = document.getElementById('trendsChannelChart').getContext('2d');
+            charts.trendsChannel = new Chart(channelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Phone', 'Chat', 'Email', 'Social'],
+                    datasets: [{ data: [900, 850, 800, 1700], backgroundColor: '#38bdf8' }]
+                },
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // TRENDS CUSTOMER
+            const customerCtx = document.getElementById('trendsCustomerChart').getContext('2d');
+            charts.trendsCustomer = new Chart(customerCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cust A', 'Cust B', 'Cust C', 'Cust D', 'Cust E'],
+                    datasets: [{ data: [600, 400, 350, 300, 250], backgroundColor: '#38bdf8' }]
+                },
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // TRENDS FAULT
+            const faultCtx = document.getElementById('trendsFaultChart').getContext('2d');
+            charts.trendsFault = new Chart(faultCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['HW', 'SW', 'Net', 'Pwr', 'Other'],
+                    datasets: [{ data: [3000, 1500, 1000, 500, 200], backgroundColor: '#38bdf8' }]
+                },
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // SALES REP
+            const repCtx = document.getElementById('salesRepChart').getContext('2d');
+            charts.sales = new Chart(repCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Team 1', 'Team 2', 'Team 3', 'Team 4', 'Team 5'],
+                    datasets: [{ label: 'Revenue', data: [450000, 620000, 380000, 510000, 740000], backgroundColor: '#10B981', borderRadius: 6 }]
                 },
                 options: { indexAxis: 'y', maintainAspectRatio: false }
             });
-
-            // Distributions
-            const distCtx = document.getElementById('trendsStatusChart').getContext('2d');
-            new Chart(distCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Closed', 'Resolved', 'Open'],
-                    datasets: [{ data: [300, 50, 100], backgroundColor: ['#10B981', '#3B82F6', '#F59E0B'] }]
-                },
-                options: { maintainAspectRatio: false }
-            });
         }
 
-        // TABS
+        // NAVIGATION LOGIC
         const navItems = document.querySelectorAll('.nav-item');
-        const contents = document.querySelectorAll('.content-body');
+        const contentSections = document.querySelectorAll('.content-body');
+        const viewTitle = document.getElementById('view-title');
+        const dashTitleDd = document.getElementById('dash-title-dropdown');
 
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 const tab = item.getAttribute('data-tab');
                 navItems.forEach(ni => ni.classList.remove('active'));
                 item.classList.add('active');
-                contents.forEach(c => c.classList.remove('active'));
-                document.getElementById(`${tab}-content`).classList.add('active');
 
-                // Header update
-                if (tab !== 'dashboard') {
-                    document.getElementById('dash-title-dropdown').style.visibility = 'hidden';
+                contentSections.forEach(c => {
+                    c.classList.remove('active');
+                    if (c.id === `${tab}-content`) c.classList.add('active');
+                });
+
+                if (tab === 'dashboard') {
+                    dashTitleDd.style.visibility = 'visible';
                 } else {
-                    document.getElementById('dash-title-dropdown').style.visibility = 'visible';
+                    dashTitleDd.style.visibility = 'hidden';
                 }
+                showToast(`Navigated to ${item.innerText.trim()}`);
             });
         });
 
+        // VIEW LOGIC
         function switchView(view) {
             document.getElementById('title-dd').classList.remove('active');
-            document.getElementById('view-title').innerHTML = `${view} <i data-lucide="chevron-down" style="width: 16px;"></i>`;
+            viewTitle.innerHTML = `${view} <i data-lucide="chevron-down" style="width: 16px;"></i>`;
 
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             if (view === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
             else if (view === 'Service Desk Trends') document.getElementById('view-trends').classList.add('active');
             else document.getElementById('view-sales').classList.add('active');
 
-            showToast(`Switched to ${view}`);
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.toggle('selected', item.innerText === view);
+            });
+            showToast(`Dashboard: ${view}`);
+        }
+
+        // FILTER LOGIC
+        function selectFilter(type, value) {
+            const pill = document.getElementById(`filter-${type}`);
+            pill.querySelector('.val').innerText = value;
+            value !== 'All' ? pill.classList.add('active') : pill.classList.remove('active');
+            document.getElementById(`filter-${type}-dd`).classList.remove('active');
+
+            // Trigger visual refresh
+            Object.values(charts).forEach(c => {
+                c.data.datasets.forEach(d => {
+                    if (d.data) d.data = d.data.map(v => Math.floor(v * (0.8 + Math.random() * 0.4)));
+                });
+                c.update();
+            });
+            showToast(`${type} set to ${value}`);
         }
 
         function toggleDropdown(id) {
@@ -724,16 +862,8 @@
             document.getElementById(id).classList.toggle('active');
         }
 
-        function selectFilter(type, val) {
-            const pill = document.getElementById(`filter-${type}`);
-            pill.querySelector('.val').innerText = val;
-            val !== 'All' ? pill.classList.add('active') : pill.classList.remove('active');
-            document.getElementById(`filter-${type}-dd`).classList.remove('active');
-            showToast(`Filter: ${val}`);
-        }
-
         function refreshData() {
-            showToast('Data refreshed');
+            showToast('Refreshing live intelligence feeds...');
             initCharts();
         }
 
