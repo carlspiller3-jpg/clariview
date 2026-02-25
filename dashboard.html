@@ -501,16 +501,66 @@
 
         <div class="filter-bar">
             <div class="filters-group">
-                <div id="filter-channel" class="filter-pill" onclick="cycleFilter('channel')">Channel: <span
-                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div id="filter-fault" class="filter-pill" onclick="cycleFilter('fault')">Fault Type: <span
-                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div id="filter-customer" class="filter-pill" onclick="cycleFilter('customer')">Customer: <span
-                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div id="filter-assignee" class="filter-pill" onclick="cycleFilter('assignee')">Assignee: <span
-                        class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i></div>
-                <div class="filter-pill add-filter" onclick="showToast('Filter builder opened')"><i data-lucide="filter"
-                        style="width: 12px;"></i> Add Filter</div>
+                <!-- Channel Filter -->
+                <div class="dropdown">
+                    <div id="filter-channel" class="filter-pill" onclick="toggleDropdown('filter-channel-dd')">
+                        Channel: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+                    </div>
+                    <div id="filter-channel-dd" class="dropdown-menu" style="left: 0;">
+                        <div class="dropdown-item selected" onclick="selectFilter('channel', 'All')">All</div>
+                        <div class="dropdown-item" onclick="selectFilter('channel', 'Phone')">Phone</div>
+                        <div class="dropdown-item" onclick="selectFilter('channel', 'Chat')">Chat</div>
+                        <div class="dropdown-item" onclick="selectFilter('channel', 'Email')">Email</div>
+                        <div class="dropdown-item" onclick="selectFilter('channel', 'Social')">Social</div>
+                    </div>
+                </div>
+
+                <!-- Fault Type Filter -->
+                <div class="dropdown">
+                    <div id="filter-fault" class="filter-pill" onclick="toggleDropdown('filter-fault-dd')">
+                        Fault Type: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+                    </div>
+                    <div id="filter-fault-dd" class="dropdown-menu" style="left: 0;">
+                        <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All</div>
+                        <div class="dropdown-item" onclick="selectFilter('fault', 'Hardware')">Hardware</div>
+                        <div class="dropdown-item" onclick="selectFilter('fault', 'Software')">Software</div>
+                        <div class="dropdown-item" onclick="selectFilter('fault', 'Network')">Network</div>
+                        <div class="dropdown-item" onclick="selectFilter('fault', 'Power')">Power</div>
+                    </div>
+                </div>
+
+                <!-- Customer Filter -->
+                <div class="dropdown">
+                    <div id="filter-customer" class="filter-pill" onclick="toggleDropdown('filter-customer-dd')">
+                        Customer: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+                    </div>
+                    <div id="filter-customer-dd" class="dropdown-menu" style="left: 0;">
+                        <div class="dropdown-item selected" onclick="selectFilter('customer', 'All')">All</div>
+                        <div class="dropdown-item" onclick="selectFilter('customer', 'Enterprise')">Enterprise</div>
+                        <div class="dropdown-item" onclick="selectFilter('customer', 'SMB')">SMB</div>
+                        <div class="dropdown-item" onclick="selectFilter('customer', 'Tier 1')">Tier 1</div>
+                        <div class="dropdown-item" onclick="selectFilter('customer', 'Public Sector')">Public Sector
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assignee Filter -->
+                <div class="dropdown">
+                    <div id="filter-assignee" class="filter-pill" onclick="toggleDropdown('filter-assignee-dd')">
+                        Assignee: <span class="val">All</span> <i data-lucide="chevron-down" style="width: 12px;"></i>
+                    </div>
+                    <div id="filter-assignee-dd" class="dropdown-menu" style="left: 0;">
+                        <div class="dropdown-item selected" onclick="selectFilter('assignee', 'All')">All</div>
+                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Milhouse')">Milhouse</div>
+                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Bart')">Bart</div>
+                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Lisa')">Lisa</div>
+                        <div class="dropdown-item" onclick="selectFilter('assignee', 'Homer')">Homer</div>
+                    </div>
+                </div>
+
+                <div class="filter-pill add-filter" onclick="showToast('Filter builder opened')">
+                    <i data-lucide="filter" style="width: 12px;"></i> Add Filter
+                </div>
             </div>
             <div class="filters-group">
                 <button class="filter-pill" onclick="showToast('Saved views list')">Saved Views <i
@@ -738,30 +788,36 @@
             });
         }
 
-        function cycleFilter(type) {
+        function toggleDropdown(id) {
+            // Close other dropdowns first
+            document.querySelectorAll('.dropdown-menu').forEach(m => {
+                if (m.id !== id) m.classList.remove('active');
+            });
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        function selectFilter(type, value) {
             const pill = document.getElementById(`filter-${type}`);
             const valSpan = pill.querySelector('.val');
-            const options = {
-                channel: ['All', 'Phone', 'Chat', 'Email', 'Social'],
-                fault: ['All', 'Hardware', 'Software', 'Network'],
-                customer: ['All', 'Enterprise', 'SMB', 'Tier 1'],
-                assignee: ['All', 'Milhouse', 'Bart', 'Lisa', 'Homer']
-            };
+            const menu = document.getElementById(`filter-${type}-dd`);
 
-            const current = valSpan.innerText;
-            const idx = options[type].indexOf(current);
-            const nextIdx = (idx + 1) % options[type].length;
-            const nextVal = options[type][nextIdx];
+            // Update UI
+            valSpan.innerText = value;
+            menu.classList.remove('active');
 
-            valSpan.innerText = nextVal;
-
-            if (nextVal !== 'All') {
+            // Handle active state styling
+            if (value !== 'All') {
                 pill.classList.add('active');
             } else {
                 pill.classList.remove('active');
             }
 
-            showToast(`Filtering by ${type}: ${nextVal}`);
+            // Mark selected in dropdown
+            menu.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.toggle('selected', item.innerText === value);
+            });
+
+            showToast(`Filtering by ${type}: ${value}`);
             updateDashboardData();
         }
 
@@ -800,10 +856,6 @@
             });
 
             showToast(`Switched to ${viewName}`);
-        }
-
-        function toggleDropdown(id) {
-            document.getElementById(id).classList.toggle('active');
         }
 
         function refreshData() {
