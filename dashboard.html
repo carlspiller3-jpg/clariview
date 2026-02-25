@@ -720,22 +720,81 @@
         <div id="settings-content" class="content-body" style="padding: 0;">
             <div
                 style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="settings"
+                <i data-lucide="building-2"
                     style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Account Settings</h1>
+                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Organization Settings</h1>
+                <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 32px;">Configure your global
+                    workspace properties and enterprise branding.</p>
                 <div
-                    style="max-width: 400px; width: 100%; text-align: left; margin-top: 32px; display: flex; flex-direction: column; gap: 20px;">
+                    style="max-width: 400px; width: 100%; text-align: left; display: flex; flex-direction: column; gap: 20px;">
                     <div style="display: flex; flex-direction: column; gap: 8px;">
                         <label style="font-size: 13px; font-weight: 600;">Organization Name</label>
                         <input type="text" value="ClariView Global"
                             style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f9fafb;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label style="font-size: 13px; font-weight: 600;">System Email</label>
-                        <input type="email" value="admin@clariview.ai"
+                        <label style="font-size: 13px; font-weight: 600;">Branding Color</label>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <div style="width: 32px; height: 32px; background: #4F46E5; border-radius: 6px;"></div>
+                            <span style="font-size: 13px; color: var(--text-muted);">Indigo (#4F46E5)</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary">Save Organization Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-central-content" class="content-body" style="padding: 0;">
+            <div
+                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
+                <i data-lucide="shield-check"
+                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
+                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Admin Central</h1>
+                <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 32px;">System-wide infrastructure
+                    management, security audits, and API control.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; width: 100%;">
+                    <div class="card" style="text-align: left;">
+                        <h4 style="margin-bottom:8px;">User Management</h4>
+                        <p style="font-size:12px; color:var(--text-muted);">Manage team permissions and access roles.
+                        </p>
+                    </div>
+                    <div class="card" style="text-align: left;">
+                        <h4 style="margin-bottom:8px;">API Tokens</h4>
+                        <p style="font-size:12px; color:var(--text-muted);">Generate and revoke secure data access keys.
+                        </p>
+                    </div>
+                    <div class="card" style="text-align: left;">
+                        <h4 style="margin-bottom:8px;">System Logs</h4>
+                        <p style="font-size:12px; color:var(--text-muted);">Track real-time data flow and error audits.
+                        </p>
+                    </div>
+                    <div class="card" style="text-align: left;">
+                        <h4 style="margin-bottom:8px;">Security</h4>
+                        <p style="font-size:12px; color:var(--text-muted);">Configure 2FA and encryption protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="account-details-content" class="content-body" style="padding: 0;">
+            <div
+                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
+                <div class="avatar" style="width: 80px; height: 80px; font-size: 32px; margin-bottom: 24px;">DF</div>
+                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 4px;">David Ferguson</h1>
+                <p style="color: var(--text-muted); margin-bottom: 32px;">System Administrator</p>
+                <div
+                    style="max-width: 400px; width: 100%; text-align: left; display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="font-size: 13px; font-weight: 600;">Personal Email</label>
+                        <input type="email" value="david.f@clariview.ai"
                             style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f9fafb;">
                     </div>
-                    <button class="btn-primary">Update Profile</button>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="font-size: 13px; font-weight: 600;">Change Password</label>
+                        <input type="password" placeholder="••••••••"
+                            style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f9fafb;">
+                    </div>
+                    <button class="btn-primary">Save Personal Profile</button>
                 </div>
             </div>
         </div>
@@ -963,15 +1022,16 @@
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             if (view === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
             else if (view === 'Service Desk Trends') document.getElementById('view-trends').classList.add('active');
-            else if (view === 'Admin Central' || view === 'Account Details') {
-                // Switch to Settings Tab
-                const settingsItem = document.querySelector('.nav-item[data-tab="settings"]');
+            else if (view === 'Admin Central') {
                 navItems.forEach(ni => ni.classList.remove('active'));
-                settingsItem.classList.add('active');
-                contentSections.forEach(c => {
-                    c.classList.remove('active');
-                    if (c.id === 'settings-content') c.classList.add('active');
-                });
+                contentSections.forEach(c => c.classList.remove('active'));
+                document.getElementById('admin-central-content').classList.add('active');
+                dashTitleDd.style.visibility = 'hidden';
+            }
+            else if (view === 'Account Details') {
+                navItems.forEach(ni => ni.classList.remove('active'));
+                contentSections.forEach(c => c.classList.remove('active'));
+                document.getElementById('account-details-content').classList.add('active');
                 dashTitleDd.style.visibility = 'hidden';
             }
             else document.getElementById('view-sales').classList.add('active');
