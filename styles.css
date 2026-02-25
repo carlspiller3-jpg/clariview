@@ -188,6 +188,22 @@ header .nav-links a.active {
     color: var(--brand-white);
 }
 
+.logo {
+    flex: 1;
+}
+
+.nav-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .logo img {
     height: auto;
     width: 150px;

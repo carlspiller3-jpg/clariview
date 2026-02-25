@@ -100,6 +100,7 @@
             font-weight: 500;
             transition: all 0.2s;
             margin-bottom: 4px;
+            cursor: pointer;
         }
 
         .nav-item i {
@@ -201,6 +202,25 @@
         /* Content Body */
         .content-body {
             padding: 40px;
+            display: none;
+            /* Hidden by default, script will show active */
+        }
+
+        .content-body.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* KPI Cards */
@@ -258,6 +278,7 @@
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow);
+            margin-bottom: 24px;
         }
 
         .card-header {
@@ -406,6 +427,58 @@
             color: var(--text-muted);
         }
 
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            background: white;
+            border-radius: 20px;
+            border: 2px dashed var(--border-color);
+        }
+
+        .empty-state i {
+            width: 48px;
+            height: 48px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .empty-state h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--text-muted);
+            max-width: 300px;
+            margin: 0 auto 24px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--brand-dark);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            transform: translateY(100px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 1200px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -423,23 +496,23 @@
 
         <nav class="nav-section">
             <div class="nav-label">Main Menu</div>
-            <a href="#" class="nav-item active"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-            <a href="#" class="nav-item"><i data-lucide="file-text"></i> Documents</a>
-            <a href="#" class="nav-item"><i data-lucide="pen-tool"></i> Composer</a>
-            <a href="#" class="nav-item"><i data-lucide="layers"></i> App Builder</a>
+            <div class="nav-item active" data-tab="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</div>
+            <div class="nav-item" data-tab="documents"><i data-lucide="file-text"></i> Documents</div>
+            <div class="nav-item" data-tab="composer"><i data-lucide="pen-tool"></i> Composer</div>
+            <div class="nav-item" data-tab="app-builder"><i data-lucide="layers"></i> App Builder</div>
         </nav>
 
         <nav class="nav-section">
             <div class="nav-label">Management</div>
-            <a href="#" class="nav-item"><i data-lucide="credit-card"></i> Billing</a>
-            <a href="#" class="nav-item"><i data-lucide="settings"></i> Settings</a>
-            <a href="#" class="nav-item"><i data-lucide="calendar"></i> Schedule</a>
+            <div class="nav-item" data-tab="billing"><i data-lucide="credit-card"></i> Billing</div>
+            <div class="nav-item" data-tab="settings"><i data-lucide="settings"></i> Settings</div>
+            <div class="nav-item" data-tab="schedule"><i data-lucide="calendar"></i> Schedule</div>
         </nav>
 
         <nav class="nav-section">
             <div class="nav-label">Support</div>
-            <a href="#" class="nav-item"><i data-lucide="help-circle"></i> Help Hub</a>
-            <a href="#" class="nav-item"><i data-lucide="life-buoy"></i> Support</a>
+            <div class="nav-item" data-tab="help-hub"><i data-lucide="help-circle"></i> Help Hub</div>
+            <div class="nav-item" data-tab="support"><i data-lucide="life-buoy"></i> Support</div>
         </nav>
 
         <div class="user-profile">
@@ -456,21 +529,28 @@
     <main class="main-content">
         <header>
             <div class="page-title">
-                <h1>Sales Pipeline</h1>
+                <h1 id="view-title">Sales Pipeline</h1>
             </div>
             <div class="header-actions">
-                <button class="btn-icon"><i data-lucide="bell"></i></button>
-                <button class="btn-icon"><i data-lucide="search"></i></button>
-                <button class="btn-primary"><i data-lucide="plus"></i> Add Widget</button>
+                <button class="btn-icon" onclick="showToast('No new notifications')"><i data-lucide="bell"></i></button>
+                <button class="btn-icon" onclick="showToast('Search feature coming soon')"><i
+                        data-lucide="search"></i></button>
+                <button class="btn-primary" onclick="showToast('Widget added to your view')"><i data-lucide="plus"></i>
+                    Add Widget</button>
             </div>
         </header>
 
-        <div class="content-body">
+        <!-- DASHBOARD TAB -->
+        <div id="dashboard-content" class="content-body active">
             <div class="filters">
-                <button class="filter-btn">Region: All <i data-lucide="chevron-down"></i></button>
-                <button class="filter-btn">Industry: All <i data-lucide="chevron-down"></i></button>
-                <button class="filter-btn">Fiscal Year: 2026 <i data-lucide="chevron-down"></i></button>
-                <button class="filter-btn"><i data-lucide="filter"></i> More Filters</button>
+                <button class="filter-btn" onclick="showToast('Filtering by Region...')">Region: All <i
+                        data-lucide="chevron-down"></i></button>
+                <button class="filter-btn" onclick="showToast('Filtering by Industry...')">Industry: All <i
+                        data-lucide="chevron-down"></i></button>
+                <button class="filter-btn" onclick="showToast('Switching Fiscal Year...')">Fiscal Year: 2026 <i
+                        data-lucide="chevron-down"></i></button>
+                <button class="filter-btn" onclick="showToast('Advanced filters opened')"><i data-lucide="filter"></i>
+                    More Filters</button>
             </div>
 
             <div class="kpi-grid">
@@ -496,7 +576,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">Revenue By Rep - YTD</h2>
-                        <button class="filter-btn"><i data-lucide="download"></i> Export</button>
+                        <button class="filter-btn" onclick="showToast('Exporting chart data...')"><i
+                                data-lucide="download"></i> Export</button>
                     </div>
                     <div class="chart-container">
                         <div class="chart-bar-wrapper">
@@ -570,35 +651,196 @@
                                 <td>3</td>
                                 <td style="font-weight: 700;">$440k</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="user-cell">
-                                        <div class="avatar" style="background: #FCE7F3; color: #9D174D;">SP</div>
-                                        <div style="font-weight: 600;">Sam Patel</div>
-                                    </div>
-                                </td>
-                                <td>2</td>
-                                <td style="font-weight: 700;">$350k</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="user-cell">
-                                        <div class="avatar" style="background: #E2E8F0; color: #475569;">TB</div>
-                                        <div style="font-weight: 600;">Taylor Brooks</div>
-                                    </div>
-                                </td>
-                                <td>2</td>
-                                <td style="font-weight: 700;">$305k</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <!-- DOCUMENTS TAB -->
+        <div id="documents-content" class="content-body">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Documents</h2>
+                    <button class="btn-primary" onclick="showToast('Uploading document...')"><i
+                            data-lucide="upload"></i> Upload</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Size</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q1 Sales Report.pdf</td>
+                            <td>Feb 12, 2026</td>
+                            <td>2.4 MB</td>
+                            <td>PDF</td>
+                        </tr>
+                        <tr>
+                            <td>Operation Budget.xlsx</td>
+                            <td>Jan 28, 2026</td>
+                            <td>1.1 MB</td>
+                            <td>Excel</td>
+                        </tr>
+                        <tr>
+                            <td>Brand Assets.zip</td>
+                            <td>Jan 15, 2026</td>
+                            <td>15.8 MB</td>
+                            <td>ZIP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- COMPOSER TAB -->
+        <div id="composer-content" class="content-body">
+            <div class="empty-state">
+                <i data-lucide="pen-tool"></i>
+                <h3>Visual Report Composer</h3>
+                <p>Drag and drop elements to create a custom executive report for your board meeting.</p>
+                <button class="btn-primary" onclick="showToast('Loading template...')">Start New Report</button>
+            </div>
+        </div>
+
+        <!-- APP BUILDER TAB -->
+        <div id="app-builder-content" class="content-body">
+            <div class="empty-state">
+                <i data-lucide="layers"></i>
+                <h3>App Builder</h3>
+                <p>Create custom mini-apps to track specific department workflows.</p>
+                <button class="btn-primary" onclick="showToast('Opening builder...')">Open App Builder</button>
+            </div>
+        </div>
+
+        <!-- BILLING TAB -->
+        <div id="billing-content" class="content-body">
+            <div class="grid grid-2">
+                <div class="card">
+                    <h2 class="card-title">Subscription</h2>
+                    <p style="color: var(--text-muted); margin: 16px 0;">Current Plan: <strong>Business Pro</strong></p>
+                    <div class="kpi-value brand-color">£495/mo</div>
+                    <button class="btn-primary" style="margin-top: 24px;">Manage Plan</button>
+                </div>
+                <div class="card">
+                    <h2 class="card-title">Payment Method</h2>
+                    <p style="color: var(--text-muted); margin: 16px 0;">Card ending in <strong>4242</strong></p>
+                    <button class="filter-btn">Update Card</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div id="settings-content" class="content-body">
+            <div class="card" style="max-width: 600px;">
+                <h2 class="card-title" style="margin-bottom: 24px;">Profile Settings</h2>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="font-size: 13px; font-weight: 600;">Display Name</label>
+                        <input type="text" value="David Ferguson"
+                            style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="font-size: 13px; font-weight: 600;">Email Address</label>
+                        <input type="email" value="1@2.com"
+                            style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px;">
+                    </div>
+                    <button class="btn-primary" onclick="showToast('Profile updated!')">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHEDULE TAB -->
+        <div id="schedule-content" class="content-body">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Upcoming Tasks</h2>
+                </div>
+                <p style="color: var(--text-muted); text-align: center; padding: 40px;">No scheduled tasks for this
+                    week.</p>
+            </div>
+        </div>
+
+        <!-- HELP HUB TAB -->
+        <div id="help-hub-content" class="content-body">
+            <div class="empty-state">
+                <i data-lucide="help-circle"></i>
+                <h3>ClariView Help Hub</h3>
+                <p>Find guides, video tutorials and documentation to help you master ClariView.</p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button class="btn-primary" onclick="showToast('Opening Docs...')">Browse Guides</button>
+                    <button class="filter-btn" onclick="showToast('Loading Video...')">Watch Tutorial</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUPPORT TAB -->
+        <div id="support-content" class="content-body">
+            <div class="card" style="text-align: center; padding: 60px;">
+                <i data-lucide="life-buoy"
+                    style="width: 48px; height: 48px; color: var(--brand-blue-3); margin-bottom: 24px;"></i>
+                <h2 class="card-title">Priority Support</h2>
+                <p style="color: var(--text-muted); margin: 16px 0;">Need immediate assistance? Our team is available
+                    24/7.</p>
+                <button class="btn-primary" style="margin: 0 auto;" onclick="showToast('Support ticket created')">Create
+                    Support Ticket</button>
+            </div>
+        </div>
+
     </main>
+
+    <div id="toast" class="toast">
+        <i data-lucide="check-circle" style="width: 18px;"></i>
+        <span id="toast-message">Action successful</span>
+    </div>
 
     <script>
         lucide.createIcons();
+
+        // TAB NAVIGATION
+        const navItems = document.querySelectorAll('.nav-item[data-tab]');
+        const contentSections = document.querySelectorAll('.content-body');
+        const viewTitle = document.getElementById('view-title');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const tab = item.getAttribute('data-tab');
+
+                // Update active state
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                // Show relative content
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === `${tab}-content`) {
+                        section.classList.add('active');
+                    }
+                });
+
+                // Update Header Title
+                viewTitle.innerText = item.innerText.trim();
+
+                // If it's the dashboard, reset title to the specific view
+                if (tab === 'dashboard') viewTitle.innerText = "Sales Pipeline";
+            });
+        });
+
+        // TOAST SYSTEM
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+            toast.classList.add('active');
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
     </script>
 </body>
 
