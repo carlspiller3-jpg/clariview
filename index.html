@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en-GB">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClariView - One View. Total Control.</title>
     <meta name="description"
-        content="ClariView gives CEOs and senior leaders a single, consolidated view of their entire business by pulling financial, commercial, and operational data out of scattered spreadsheets and into one clear executive dashboard, so they can stop chasing reports and start making better decisions.">
+        content="ClariView gives CEOs and senior leaders a single, consolidated view of their entire organisation by pulling financial, commercial, and operational data into one clear executive dashboard.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap"
         rel="stylesheet">
 
     <!-- Favicon -->
@@ -26,9 +26,9 @@
 
     <!-- Header -->
     <header>
-        <div class="container header-container" style="display: flex; align-items: center; width: 100%;">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
             <a href="index.html" class="logo">
-                <img src="assets/logo-xl-transparent.png" alt="ClariView Logo">
+                <img src="assets/logo-split-light-text-md.png" alt="ClariView Logo">
             </a>
             <div class="nav-center">
                 <nav class="nav-links">
@@ -38,186 +38,230 @@
                     <a href="about.html">About</a>
                 </nav>
             </div>
-            <div class="nav-right">
-                <a href="login.html" class="btn btn-primary" style="padding: 8px 24px;">Login</a>
-                <button class="mobile-menu-btn" aria-label="Toggle Menu" style="margin-left: 15px;">☰</button>
+            <div class="nav-right" style="display: flex; align-items: center;">
+                <a href="login.html" class="btn btn-secondary">Login</a>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu"
+                    style="margin-left: 20px; background: none; border: none; color: white; display: none; font-size: 24px; cursor: pointer;">☰</button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu Script -->
-    <script>
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
-
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container text-center fade-in">
-            <p class="hero-tagline">Executive Performance Infrastructure</p>
-            <h1>One View. Total Control.</h1>
-            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 2rem auto;">
-                ClariView gives CEOs and senior leaders a clear, consolidated view of financial and
-                operational performance across every department — in one place.
+    <section class="hero section">
+        <div class="container fade-in">
+            <span class="hero-tagline">Executive Performance Infrastructure</span>
+            <h1>One View. <span class="serif-text">Total Control.</span></h1>
+            <p
+                style="font-size: 1.25rem; max-width: 900px; margin: 0 auto 3rem auto; font-weight: 300; line-height: 1.4;">
+                ClariView centralises financial and operational performance across every department into one high-impact
+                executive interface.
             </p>
-            <p style="margin-bottom: 2rem;">No more scattered spreadsheets. No more chasing reports. Just clarity.</p>
-            <a href="book-a-call.html" class="btn btn-primary">Book a Conversation</a>
+            <div style="display: flex; justify-content: center;">
+                <a href="get-started.html" class="btn btn-primary">Start Strategy Review</a>
+            </div>
         </div>
     </section>
 
     <!-- The Problem Section -->
-    <section class="section bg-alt">
-        <div class="container">
-            <div class="grid grid-2" style="align-items: center;">
-                <div>
-                    <h2>The Problem</h2>
-                    <p class="lead" style="font-size: 1.25rem; margin-bottom: 1.5rem;">Running a business shouldn’t feel
-                        like guesswork.</p>
-                    <p>If you oversee multiple departments, you already know the reality:</p>
-                    <ul style="margin-top: 1rem; margin-bottom: 1rem;">
-                        <li style="margin-bottom: 0.5rem;">❌ Finance sits in one system.</li>
-                        <li style="margin-bottom: 0.5rem;">❌ Commercial data sits somewhere else.</li>
-                        <li style="margin-bottom: 0.5rem;">❌ Operations run on spreadsheets.</li>
-                        <li style="margin-bottom: 0.5rem;">❌ Board reports take days to prepare.</li>
-                    </ul>
-                    <p>By the time everything is pulled together, the moment has passed.</p>
-                    <div class="quote-box">
-                        Most leadership teams don’t lack data. <br>
-                        They lack a clear, unified view of it.
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <!-- Placeholder for visual representation of chaos/spreadsheets -->
-                    <div
-                        style="background: #e2e8f0; height: 300px; width: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b;">
-                        [Visual: Disconnected Spreadsheets & Systems]
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Solution Section -->
     <section class="section">
         <div class="container">
-            <div class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">
-                <h2>The Solution</h2>
-                <p>ClariView brings everything together.</p>
-                <p>ClariView centralises your key financial and operational data into one structured executive
-                    dashboard.</p>
-            </div>
+            <div class="impact-section">
+                <div class="impact-content text-mobile-center">
+                    <span class="hero-tagline" style="color: var(--brand-blue);">Infrastructure Audit</span>
+                    <h2 style="font-size: clamp(2.5rem, 5vw, 3.5rem);">The Clarity <br><span
+                            class="serif-text">Gap.</span></h2>
+                    <p style="font-size: 1.15rem; margin-bottom: 2.5rem; color: var(--text-dark); max-width: 500px;">
+                        Running a high-growth business shouldn’t feel like guesswork. Most leadership teams don’t lack
+                        data — they lack contextual clarity.
+                    </p>
 
-            <div class="grid grid-2">
-                <div class="card">
-                    <h3>You See:</h3>
-                    <ul style="margin-top: 1rem;">
-                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Financial performance and margin
-                            visibility</li>
-                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Budget vs actual tracking</li>
-                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Commercial revenue and pipeline
-                            position</li>
-                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Department-level performance
-                            indicators</li>
-                        <li style="padding: 0.5rem 0;">✅ Key risks and opportunities</li>
-                    </ul>
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-step">
+                            <div class="roadmap-number" style="background: #ff4b4b;">✕</div>
+                            <h4>Disconnected Platforms</h4>
+                            <p>Finance, sales, and operations sit in siloed systems that don't speak to each other.</p>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="roadmap-number" style="background: #ff4b4b;">✕</div>
+                            <h4>Static Reporting</h4>
+                            <p>Leadership relies on manual spreadsheet extraction that is out of date by the time it
+                                reaches the board.</p>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="roadmap-number" style="background: #ff4b4b;">✕</div>
+                            <h4>Operational Blindspots</h4>
+                            <p>High-growth complexity masks margin leakages and delivery inefficiencies until they
+                                impact the bottom line.</p>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
-                    <h3 class="text-primary">It’s not about more data.</h3>
-                    <h3 class="text-primary" style="margin-top: 0.5rem;">It’s about better decisions.</h3>
-                    <br>
-                    <a href="solution.html" class="btn btn-outline">Explore the Solution &rarr;</a>
+                <div class="impact-visual">
+                    <img src="assets/disconnected_systems.png" alt="Disconnected Systems" class="img-premium">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Who It's For Section -->
+    <!-- One System of Record -->
     <section class="section bg-alt">
-        <div class="container text-center">
-            <h2>Who It’s For</h2>
-            <p style="max-width: 600px; margin: 0 auto 3rem auto;">ClariView is built for organisations with multiple
-                moving parts.</p>
-
-            <div class="grid grid-4"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <div class="card">
-                    <div class="card-icon">⚽</div>
-                    <h3>Sports Organisations</h3>
-                    <p>Football clubs and sports entities managing operations, commercial, and finance.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏢</div>
-                    <h3>Multi-Department SMEs</h3>
-                    <p>Sales, operations, and delivery teams that need alignment.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏨</div>
-                    <h3>Hospitality Operators</h3>
-                    <p>Venues and hospitality groups with multiple revenue streams.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">💼</div>
-                    <h3>Service Businesses</h3>
-                    <p>Service-based models requiring clear performance tracking.</p>
-                </div>
+        <div class="container">
+            <div style="max-width: 700px; margin-bottom: 3rem;" class="text-mobile-center">
+                <span class="hero-tagline">The Intelligence Layer</span>
+                <h2>One System of <span class="serif-text">Record.</span></h2>
+                <p style="font-size: 1.25rem;">ClariView centralises your key financial and operational pillars into one
+                    structured executive environment.</p>
             </div>
 
-            <div style="margin-top: 3rem;">
-                <p>If you’re responsible for overall performance, and you’re tired of piecing together reports each
-                    month, this was built for you.</p>
-                <a href="who-its-for.html" class="btn btn-primary" style="margin-top: 1rem;">See Use Cases</a>
+            <div class="feature-row">
+                <!-- Row 1: Financial -->
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <span class="hero-tagline"
+                            style="color: var(--brand-blue); font-size: 11px; margin-bottom: 1rem;">PHASE 01</span>
+                        <h3>Financial Visibility</h3>
+                        <p style="font-size: 1.1rem; margin-bottom: 0;">Total P&L clarity, margin tracking, and
+                            real-time budget vs actual performance across every department.</p>
+                    </div>
+                    <div class="feature-visual">
+                        <img src="assets/financial_visibility_real.png" alt="Real Financial Visibility"
+                            class="img-premium">
+                    </div>
+                </div>
+
+                <!-- Row 2: Commercial -->
+                <div class="feature-item">
+                    <div class="feature-visual">
+                        <img src="assets/commercial_intelligence_real.png" alt="Real Commercial Intelligence"
+                            class="img-premium">
+                    </div>
+                    <div class="feature-content">
+                        <span class="hero-tagline"
+                            style="color: var(--brand-blue); font-size: 11px; margin-bottom: 1rem;">PHASE 02</span>
+                        <h3>Commercial Intelligence</h3>
+                        <p style="font-size: 1.1rem; margin-bottom: 0;">An instant, unified view of revenue pipelines,
+                            commercial performance indicators, and group-wide growth opportunities.</p>
+                    </div>
+                </div>
+
+                <!-- Row 3: Operational -->
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <span class="hero-tagline"
+                            style="color: var(--brand-blue); font-size: 11px; margin-bottom: 1rem;">PHASE 03</span>
+                        <h3>Operational Accountability</h3>
+                        <p style="font-size: 1.1rem; margin-bottom: 0;">Automated departmental KPIs that hold leadership
+                            teams accountable to strategic objectives without manual reporting delay.</p>
+                    </div>
+                    <div class="feature-visual">
+                        <img src="assets/operational_accountability_real.png" alt="Real Operational Accountability"
+                            class="img-premium">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- What Changes Section -->
+    <!-- Who It's For -->
     <section class="section">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">What Changes When You Have ClariView</h2>
+            <div class="impact-section" style="flex-direction: row-reverse;">
+                <div class="impact-content text-mobile-center">
+                    <span class="hero-tagline">Strategic Positioning</span>
+                    <h2>Built for <span class="serif-text">Complexity.</span></h2>
+                    <p style="font-size: 1.15rem; margin-bottom: 3rem; opacity: 0.8;">Designed for organisations with
+                        multiple
+                        moving parts, where clarity is the difference between reactive management and proactive scaling.
+                    </p>
 
-            <div class="grid grid-3">
-                <div class="card">
-                    <p class="text-light" style="font-size: 0.9rem;">Instead of asking:</p>
-                    <p style="font-style: italic; margin-bottom: 1rem;">“Can someone pull that together for me?”</p>
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
-                    <p class="text-primary" style="font-weight: 600;">You can ask:</p>
-                    <p class="text-primary" style="font-weight: 600;">“What are we doing about it?”</p>
+                    <div style="display: grid; gap: 2.5rem; text-align: left;">
+                        <div style="padding-left: 2rem; border-left: 2px solid var(--brand-blue);"
+                            class="text-mobile-center">
+                            <h3
+                                style="font-size: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--brand-blue);">
+                                Athletics & Clubs</h3>
+                            <p style="font-size: 0.95rem; line-height: 1.4;">Sporting entities managing complex
+                                cross-departmental operations and diverse revenue streams.</p>
+                        </div>
+                        <div style="padding-left: 2rem; border-left: 2px solid var(--brand-blue);"
+                            class="text-mobile-center">
+                            <h3
+                                style="font-size: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--brand-blue);">
+                                Multi-Department SMEs</h3>
+                            <p style="font-size: 0.95rem; line-height: 1.4;">High-growth businesses with siloed sales,
+                                operations, and finance teams looking for a single source of truth.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <p class="text-light" style="font-size: 0.9rem;">Instead of:</p>
-                    <p style="font-style: italic; margin-bottom: 1rem;">Reacting at month end</p>
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
-                    <p class="text-primary" style="font-weight: 600;">You see patterns early.</p>
-                </div>
-                <div class="card">
-                    <p class="text-light" style="font-size: 0.9rem;">Instead of:</p>
-                    <p style="font-style: italic; margin-bottom: 1rem;">Managing departments separately</p>
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
-                    <p class="text-primary" style="font-weight: 600;">You manage the business as one.</p>
+                <div class="impact-visual">
+                    <img src="assets/actual_dashboard_showcase.png" alt="ClariView Executive Dashboard"
+                        class="img-premium">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section bg-alt text-center">
-        <div class="container">
-            <h2>Start with Clarity.</h2>
-            <p style="margin-bottom: 2rem;">We’re onboarding a small number of founding organisations.<br>
-                If you’d like to see what a clear executive view could look like in your business, book a short call.
+    <!-- Engagement Pop-up -->
+    <div class="strategy-popup" id="ctaPopup">
+        <button class="close-popup" id="closePopup">&times;</button>
+        <div class="popup-inner">
+            <span class="hero-tagline"
+                style="color: var(--brand-blue); font-size: 10px; margin-bottom: 0.5rem; letter-spacing: 0.2em;">Limited
+                Availability</span>
+            <h3 style="color: white; margin-bottom: 0.75rem; font-size: 1.25rem;">Start with <span
+                    class="serif-text">Clarity.</span></h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 1.5rem;" class="hide-mobile">
+                Discover what a clear executive view looks like in your organisation.
             </p>
-            <a href="book-a-call.html" class="btn btn-primary btn-lg">Book a Conversation</a>
+            <a href="get-started.html" class="btn btn-primary"
+                style="width: 100%; padding: 12px; font-size: 12px;">Begin Strategy Review</a>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 ClariView. All rights reserved.</p>
+
+    <!-- Footer -->
+    <footer class="section"
+        style="padding: 4rem 0; background: var(--brand-dark); border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container text-center">
+            <img src="assets/logo-split-light-text-sm.png" alt="ClariView Logo"
+                style="height: 24px; margin-bottom: 2rem; opacity: 0.5;">
+            <p style="color: rgba(255,255,255,0.4) !important; font-size: 0.85rem;">&copy; 2026 ClariView. Strategic
+                Intelligence for Leadership Teams.</p>
         </div>
     </footer>
+
+    <script>
+        const ctaPopup = document.getElementById('ctaPopup');
+        const closePopup = document.getElementById('closePopup');
+        let popupDismissed = false;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600 && !popupDismissed) {
+                ctaPopup.classList.add('active');
+            }
+        });
+
+        closePopup.addEventListener('click', () => {
+            ctaPopup.classList.remove('active');
+            popupDismissed = true;
+        });
+
+        // Simple Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
+            const nav = document.querySelector('.nav-center');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.position = 'fixed';
+            nav.style.top = 'var(--header-height)';
+            nav.style.left = '0';
+            nav.style.width = '100%';
+            nav.style.background = 'var(--brand-dark)';
+            nav.style.padding = '2rem';
+            nav.style.flexDirection = 'column';
+            nav.style.gap = '2rem';
+            nav.querySelector('.nav-links').style.flexDirection = 'column';
+            nav.querySelector('.nav-links').style.alignItems = 'center';
+            nav.querySelectorAll('.nav-links a').forEach(a => a.style.marginLeft = '0');
+        });
+    </script>
 
 </body>
 

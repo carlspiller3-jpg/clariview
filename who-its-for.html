@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en-GB">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who It's For - ClariView</title>
+    <title>Sectors - ClariView</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/favicon-32.png">
     <link rel="stylesheet" href="styles.css">
@@ -17,9 +17,9 @@
 <body>
 
     <header>
-        <div class="container header-container" style="display: flex; align-items: center; width: 100%;">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
             <a href="index.html" class="logo">
-                <img src="assets/logo-xl-transparent.png" alt="ClariView Logo">
+                <img src="assets/logo-split-light-text-md.png" alt="ClariView Logo">
             </a>
             <div class="nav-center">
                 <nav class="nav-links">
@@ -29,74 +29,150 @@
                     <a href="about.html">About</a>
                 </nav>
             </div>
-            <div class="nav-right">
-                <a href="login.html" class="btn btn-primary" style="padding: 8px 24px;">Login</a>
-                <button class="mobile-menu-btn" aria-label="Toggle Menu" style="margin-left: 15px;">☰</button>
+            <div class="nav-right" style="display: flex; align-items: center;">
+                <a href="login.html" class="btn btn-secondary">Login</a>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu"
+                    style="margin-left: 20px; background: none; border: none; color: white; display: none; font-size: 24px; cursor: pointer;">☰</button>
             </div>
         </div>
     </header>
 
-    <script>
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
-
-    <section class="section bg-alt text-center">
+    <section class="section text-center" style="padding-top: 180px;">
         <div class="container fade-in">
-            <h1>Built for Leaders Managing Complexity</h1>
-            <p class="lead" style="max-width: 800px; margin: 0 auto;">
-                ClariView is designed for organisations where performance depends on multiple departments working in
-                sync.
+            <span class="hero-tagline">Intelligence Architecture</span>
+            <h1>Vertical <br><span class="serif-text">Specialisation.</span></h1>
+            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; font-weight: 300; opacity: 0.8;">
+                ClariView is designed for complex, departmentalised environments where traditional reporting creates
+                static, disconnected data silos.
             </p>
         </div>
     </section>
 
-    <section class="section">
+    <!-- Industry Section 01: Sports -->
+    <section class="section bg-alt" style="padding-top: 4rem;">
         <div class="container">
-            <div class="grid grid-3">
-                <div class="card">
-                    <div class="card-icon">⚽</div>
-                    <h3>Football & Sports Organisations</h3>
-                    <p>Clubs operate across football operations, commercial, hospitality, facilities and finance.</p>
-                    <p style="margin-top: 1rem;"><strong>Why ClariView?</strong> Provides one consolidated executive
-                        view to support smarter decisions at board and CEO level.</p>
+            <div class="impact-section">
+                <div class="impact-content">
+                    <span class="hero-tagline" style="margin-bottom: 1rem;">Athletics & Elite Sport</span>
+                    <h2 style="font-size: 2.5rem;">Sporting <br><span class="serif-text">Organisations.</span></h2>
+                    <p style="margin-bottom: 2rem; opacity: 0.8;">Clubs and academies operate with a unique nexus of
+                        commercial revenue, athletic performance, and
+                        complex facilities management. ClariView unifies these pillars into a singular institution view.
+                    </p>
+
+                    <div class="capability-grid" style="grid-template-columns: 1fr; gap: 1.5rem;">
+                        <div class="capability-card" style="padding: 1.5rem; text-align: left;">
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Multi-Revenue Sync</h3>
+                            <p style="font-size: 0.95rem;">Unify ticket sales, sponsorship, and broadcast rights with
+                                delivery costs in one live P&L.</p>
+                        </div>
+                        <div class="capability-card" style="padding: 1.5rem; text-align: left;">
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Academy ROI</h3>
+                            <p style="font-size: 0.95rem;">Track investment into development paths against commercial
+                                output and operational overheads.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🏢</div>
-                    <h3>Multi-Department SMEs</h3>
-                    <p>If your business includes sales, operations, finance and delivery teams, alignment becomes
-                        critical as you grow.</p>
-                    <p style="margin-top: 1rem;"><strong>Why ClariView?</strong> Brings clarity without adding
-                        complexity.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏨</div>
-                    <h3>Hospitality & Venue Operators</h3>
-                    <p>Multiple revenue streams. Variable costs. Operational pressure.</p>
-                    <p style="margin-top: 1rem;"><strong>Why ClariView?</strong> Gives you a monthly view that actually
-                        reflects reality — not just a static profit figure.</p>
+                <div class="impact-visual">
+                    <img src="assets/actual_dashboard_showcase.png" alt="Sporting Institution Overview"
+                        class="img-premium">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section text-center bg-alt">
+    <!-- Industry Section 02: High Growth SME -->
+    <section class="section">
         <div class="container">
-            <h2>See How ClariView Fits Your Organisation</h2>
-            <p>If you fit one of these profiles, let's talk.</p>
-            <a href="book-a-call.html" class="btn btn-primary btn-lg" style="margin-top: 1rem;">Book a Conversation</a>
+            <div class="impact-section" style="flex-direction: row-reverse;">
+                <div class="impact-content">
+                    <span class="hero-tagline" style="margin-bottom: 1rem;">Corporate Growth</span>
+                    <h2 style="font-size: 2.5rem;">Multi-Dept <br><span class="serif-text">SMEs.</span></h2>
+                    <p style="margin-bottom: 2rem; opacity: 0.8;">High-growth businesses where sales, fulfilment, and
+                        finance teams currently operate without a single
+                        source of truth. We provide the infrastructure for unified scaling.</p>
+
+                    <div class="capability-grid" style="grid-template-columns: 1fr; gap: 1.5rem;">
+                        <div class="capability-card"
+                            style="padding: 1.5rem; text-align: left; border-color: var(--border-light);">
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Commercial Link</h3>
+                            <p style="font-size: 0.95rem;">See exactly how sales pipeline projections impact operational
+                                capacity and departmental margin.</p>
+                        </div>
+                        <div class="capability-card"
+                            style="padding: 1.5rem; text-align: left; border-color: var(--border-light);">
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Margin Protection</h3>
+                            <p style="font-size: 0.95rem;">Real-time budget vs actual performance across every
+                                department to proactively preserve profit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="impact-visual">
+                    <img src="assets/financial_visibility_real.png" alt="SME Executive Governance" class="img-premium">
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 ClariView. All rights reserved.</p>
+    <!-- Engagement Pop-up -->
+    <div class="strategy-popup" id="ctaPopup">
+        <button class="close-popup" id="closePopup">&times;</button>
+        <div class="popup-inner">
+            <span class="hero-tagline"
+                style="color: var(--brand-blue); font-size: 10px; margin-bottom: 0.5rem; letter-spacing: 0.2em;">Limited
+                Availability</span>
+            <h3 style="color: white; margin-bottom: 0.75rem; font-size: 1.25rem;">Start with <span
+                    class="serif-text">Clarity.</span></h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 1.5rem;" class="hide-mobile">
+                Discover what a clear executive view looks like in your organisation.
+            </p>
+            <a href="get-started.html" class="btn btn-primary"
+                style="width: 100%; padding: 12px; font-size: 12px;">Begin Strategy Review</a>
+        </div>
+    </div>
+
+    <footer class="section"
+        style="padding: 4rem 0; background: var(--brand-dark); border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container text-center">
+            <img src="assets/logo-split-light-text-sm.png" alt="ClariView Logo"
+                style="height: 24px; margin-bottom: 2rem; opacity: 0.5;">
+            <p style="color: rgba(255,255,255,0.4) !important; font-size: 0.85rem;">&copy; 2026 ClariView. Strategic
+                Intelligence for Leadership Teams.</p>
         </div>
     </footer>
 
+    <script>
+        const ctaPopup = document.getElementById('ctaPopup');
+        const closePopup = document.getElementById('closePopup');
+        let popupDismissed = false;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400 && !popupDismissed) {
+                ctaPopup.classList.add('active');
+            }
+        });
+
+        closePopup.addEventListener('click', () => {
+            ctaPopup.classList.remove('active');
+            popupDismissed = true;
+        });
+
+        document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
+            const nav = document.querySelector('.nav-center');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.position = 'fixed';
+            nav.style.top = 'var(--header-height)';
+            nav.style.left = '0';
+            nav.style.width = '100%';
+            nav.style.background = 'var(--brand-dark)';
+            nav.style.padding = '2rem';
+            nav.style.flexDirection = 'column';
+            nav.style.gap = '2rem';
+            nav.querySelector('.nav-links').style.flexDirection = 'column';
+            nav.querySelector('.nav-links').style.alignItems = 'center';
+            nav.querySelectorAll('.nav-links a').forEach(a => a.style.marginLeft = '0');
+        });
+    </script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en-GB">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/favicon-32.png">
     <link rel="stylesheet" href="styles.css">
@@ -17,9 +17,9 @@
 <body>
 
     <header>
-        <div class="container header-container" style="display: flex; align-items: center; width: 100%;">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
             <a href="index.html" class="logo">
-                <img src="assets/logo-xl-transparent.png" alt="ClariView Logo">
+                <img src="assets/logo-split-light-text-md.png" alt="ClariView Logo">
             </a>
             <div class="nav-center">
                 <nav class="nav-links">
@@ -29,99 +29,191 @@
                     <a href="about.html">About</a>
                 </nav>
             </div>
-            <div class="nav-right">
-                <a href="login.html" class="btn btn-primary" style="padding: 8px 24px;">Login</a>
-                <button class="mobile-menu-btn" aria-label="Toggle Menu" style="margin-left: 15px;">☰</button>
+            <div class="nav-right" style="display: flex; align-items: center;">
+                <a href="login.html" class="btn btn-secondary">Login</a>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu"
+                    style="margin-left: 20px; background: none; border: none; color: white; display: none; font-size: 24px; cursor: pointer;">☰</button>
             </div>
         </div>
     </header>
 
-    <script>
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
-
-    <section class="section text-center bg-alt">
+    <section class="section text-center" style="padding-top: 200px;">
         <div class="container fade-in">
-            <h1>Executive Performance Infrastructure</h1>
-            <p class="lead" style="max-width: 800px; margin: 0 auto;">
-                ClariView is not another analytics tool.<br>
-                It’s a structured, leadership-focused performance system designed to simplify decision-making at the
-                top.
+            <span class="hero-tagline">Integrated Intelligence</span>
+            <h1>Performance <br><span class="serif-text">Infrastructure.</span></h1>
+            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; font-weight: 300; opacity: 0.8;">
+                ClariView is not an analytics tool. It is a high-impact performance infrastructure designed to dismantle
+                data silos and simplify executive decision-making.
             </p>
         </div>
     </section>
 
     <section class="section">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">What You Receive</h2>
-            <div class="grid grid-2">
-                <div class="card">
-                    <h3>Executive Dashboard</h3>
-                    <p>A clear, high-level overview of overall performance across the organisation.</p>
+            <div style="max-width: 600px; margin-bottom: 6rem;">
+                <h2 style="font-size: 2.5rem;">Executive <br><span class="serif-text">Deliverables.</span></h2>
+                <p style="font-size: 1.15rem; opacity: 0.8;">We build the visibility that senior leaders require to
+                    maintain total
+                    control over organisational health.</p>
+            </div>
+
+            <div class="feature-deliverable">
+                <div class="deliverable-label">Console</div>
+                <div class="deliverable-content">
+                    <h3>Executive Interface</h3>
+                    <p>A singular, high-impact overview of performance metrics across all departments, translated
+                        into strategic board-ready insights.</p>
                 </div>
-                <div class="card">
-                    <h3>Financial Visibility</h3>
-                    <p>P&L tracking, budget comparisons, cost breakdowns and margin clarity.</p>
+                <div class="deliverable-visual">
+                    <img src="assets/actual_dashboard_showcase.png" alt="Executive Interface Overview">
                 </div>
-                <div class="card">
-                    <h3>Department Alignment</h3>
-                    <p>Commercial, operations, delivery and finance — viewed together, not in isolation.</p>
+            </div>
+
+            <div class="feature-deliverable">
+                <div class="deliverable-label">P&L</div>
+                <div class="deliverable-content">
+                    <h3>Financial Precision</h3>
+                    <p>Deep-dive into P&L tracking, margin protection, and real-time budget vs actual modelling
+                        without manual administrative delay.</p>
                 </div>
-                <div class="card">
-                    <h3>Structured Reporting</h3>
-                    <p>Board-ready insights without days of manual preparation.</p>
+                <div class="deliverable-visual">
+                    <img src="assets/financial_visibility_real.png" alt="Financial Precision Tool">
+                </div>
+            </div>
+
+            <div class="feature-deliverable">
+                <div class="deliverable-label">Align</div>
+                <div class="deliverable-content">
+                    <h3>Operational Sync</h3>
+                    <p>A unified view of commercial and delivery data side-by-side, allowing leaders to see exactly
+                        where performance is stalling.</p>
+                </div>
+                <div class="deliverable-visual">
+                    <img src="assets/commercial_intelligence_real.png" alt="Operational Sync Interface">
+                </div>
+            </div>
+
+            <div class="feature-deliverable">
+                <div class="deliverable-label">Ready</div>
+                <div class="deliverable-content">
+                    <h3>Governance Infrastructure</h3>
+                    <p>Strategic reports pre-formatted for executive governance, ensuring leadership teams spend
+                        time on strategy, not preparation.</p>
+                </div>
+                <div class="deliverable-visual">
+                    <img src="assets/operational_accountability_real.png" alt="Governance Infrastructure Reports">
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
+    <!-- Deployment Process -->
     <section class="section bg-alt">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">How It Works</h2>
-            <div class="grid grid-4" style="text-align: center;">
-                <div>
-                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">1</div>
-                    <p>We review your current reporting setup.</p>
-                </div>
-                <div>
-                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">2</div>
-                    <p>We structure the data into a consistent format.</p>
-                </div>
-                <div>
-                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">3</div>
-                    <p>We configure your executive dashboard.</p>
-                </div>
-                <div>
-                    <div style="font-size: 3rem; font-weight: 700; color: #cbd5e1; margin-bottom: 1rem;">4</div>
-                    <p>Your leadership team gains ongoing visibility and control.</p>
-                </div>
-            </div>
+            <div class="impact-section">
+                <div class="impact-content text-mobile-center">
+                    <span class="hero-tagline">Transformation Journey</span>
+                    <h2>The Roadmap to <br><span class="serif-text">Clarity.</span></h2>
+                    <p style="font-size: 1.15rem; margin-bottom: 3rem; opacity: 0.8;">We integrate with your existing
+                        systems. No
+                        internal hiring, no complex software swaps.</p>
 
-            <div class="text-center" style="margin-top: 4rem;">
-                <p>There’s no need for internal analysts or complex new systems.</p>
-                <p class="text-primary" style="font-weight: 600;">ClariView works alongside the tools you already use.
-                </p>
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-step">
+                            <div class="roadmap-number">01</div>
+                            <h4>Infrastructure Audit</h4>
+                            <p>Identifying current data silos and reporting flaws within your existing architecture.</p>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="roadmap-number">02</div>
+                            <h4>Stream Normalisation</h4>
+                            <p>Fragmented departmental data streams are cleansed and unified into a structured
+                                environment.</p>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="roadmap-number">03</div>
+                            <h4>Executive Configuration</h4>
+                            <p>We build bespoke oversight layers tailored to your specific leadership requirements.</p>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="roadmap-number">04</div>
+                            <h4>Total Visibility</h4>
+                            <p>Achieve real-time organisational health tracking across all departments.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="impact-visual">
+                    <div class="impact-quote-card">
+                        <span class="hero-tagline" style="color: var(--brand-blue); margin-bottom: 1.5rem;">Efficiency
+                            Statement</span>
+                        <h3>"ClariView works with what you <span class="serif-text">already built.</span>"</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section text-center">
-        <div class="container">
-            <h2>Ready for Clarity?</h2>
-            <a href="book-a-call.html" class="btn btn-primary btn-lg" style="margin-top: 1rem;">Book a Conversation</a>
-        </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 ClariView. All rights reserved.</p>
+    <!-- Engagement Pop-up -->
+    <div class="strategy-popup" id="ctaPopup">
+        <button class="close-popup" id="closePopup">&times;</button>
+        <div class="popup-inner">
+            <span class="hero-tagline"
+                style="color: var(--brand-blue); font-size: 10px; margin-bottom: 0.5rem; letter-spacing: 0.2em;">Limited
+                Availability</span>
+            <h3 style="color: white; margin-bottom: 0.75rem; font-size: 1.25rem;">Start with <span
+                    class="serif-text">Clarity.</span></h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 1.5rem;" class="hide-mobile">
+                Discover what a clear executive view looks like in your organisation.
+            </p>
+            <a href="get-started.html" class="btn btn-primary"
+                style="width: 100%; padding: 12px; font-size: 12px;">Begin Strategy Review</a>
+        </div>
+    </div>
+
+    <footer class="section"
+        style="padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.05); background: var(--brand-dark);">
+        <div class="container text-center">
+            <img src="assets/logo-split-light-text-sm.png" alt="ClariView Logo"
+                style="height: 24px; margin-bottom: 2rem; opacity: 0.5;">
+            <p style="color: rgba(255,255,255,0.4) !important;">&copy; 2026 ClariView. Strategic Intelligence for
+                Leadership Teams.</p>
         </div>
     </footer>
 
+    <script>
+        const ctaPopup = document.getElementById('ctaPopup');
+        const closePopup = document.getElementById('closePopup');
+        let popupDismissed = false;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400 && !popupDismissed) {
+                ctaPopup.classList.add('active');
+            }
+        });
+
+        closePopup.addEventListener('click', () => {
+            ctaPopup.classList.remove('active');
+            popupDismissed = true;
+        });
+
+        document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
+            const nav = document.querySelector('.nav-center');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.position = 'fixed';
+            nav.style.top = 'var(--header-height)';
+            nav.style.left = '0';
+            nav.style.width = '100%';
+            nav.style.background = 'var(--brand-dark)';
+            nav.style.padding = '2rem';
+            nav.style.flexDirection = 'column';
+            nav.style.gap = '2rem';
+            nav.querySelector('.nav-links').style.flexDirection = 'column';
+            nav.querySelector('.nav-links').style.alignItems = 'center';
+            nav.querySelectorAll('.nav-links a').forEach(a => a.style.marginLeft = '0');
+        });
+    </script>
 </body>
 
 </html>

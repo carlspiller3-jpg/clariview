@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Review - ClariView</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon-32.png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg-dark: #0A0F1A;
+            --brand-blue: #4697C1;
+            --brand-dark: #21293B;
+            --text-white: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --font-heading: 'Roboto', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .funnel-container {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .funnel-card {
+            width: 100%;
+        }
+
+        .step-label {
+            color: var(--brand-blue);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .sub-header {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .selection-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .selection-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .selection-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--brand-blue);
+            transform: translateX(10px);
+        }
+
+        .selection-item.selected {
+            background: rgba(70, 151, 193, 0.1);
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 30px rgba(70, 151, 193, 0.1);
+        }
+
+        .selection-info h3 {
+            font-size: 1.15rem;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .selection-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .selection-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .selection-item.selected .selection-check {
+            background: var(--brand-blue);
+            border-color: var(--brand-blue);
+        }
+
+        .selection-item.selected .selection-check::after {
+            content: "✓";
+            color: white;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .progress-bar {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--brand-blue);
+            width: 25%;
+            transition: width 0.8s ease;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        input {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            padding: 18px;
+            width: 100%;
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        input:focus {
+            border-color: var(--brand-blue);
+            outline: none;
+        }
+
+        .price-badge {
+            font-size: 4rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: white;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .selection-item {
+                padding: 1.25rem;
+            }
+
+            .btn-row {
+                flex-direction: column-reverse;
+                gap: 1rem;
+            }
+
+            .btn-row .btn {
+                width: 100%;
+            }
+
+            .selection-info h3 {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html">
+            <img src="assets/logo-split-light-text-md.png" alt="ClariView Logo" style="height: 24px;">
+        </a>
+        <a href="index.html"
+            style="color: var(--text-muted); text-decoration: none; font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;">←
+            Close Review</a>
+    </nav>
+
+    <main class="funnel-container">
+        <div class="funnel-card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <!-- Step 1: Sector -->
+            <div class="step active" id="step1">
+                <span class="step-label">Segment Selection</span>
+                <h1>Tell us about <br>your <span class="serif-text">organisation.</span></h1>
+                <p class="sub-header">Select the sector that best describes your operations.</p>
+
+                <div class="selection-list">
+                    <div class="selection-item" onclick="selectOption(this, 'step1', 'Sports')">
+                        <div class="selection-info">
+                            <h3>Sports Organisation</h3>
+                            <p>Clubs, academies, and athletic governing bodies.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step1', 'SME')">
+                        <div class="selection-info">
+                            <h3>Multi-Department Enterprise</h3>
+                            <p>High-growth businesses with siloed team functions.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step1', 'Hospitality')">
+                        <div class="selection-info">
+                            <h3>Hospitality Operator</h3>
+                            <p>Venues and groups managing complex revenue streams.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step1', 'Strategy')">
+                        <div class="selection-info">
+                            <h3>Service & Advisory</h3>
+                            <p>Professional firms requiring total resource visibility.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                </div>
+
+                <div class="btn-row" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="nextStep(2)">Continue to Objectives →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Goal -->
+            <div class="step" id="step2">
+                <span class="step-label">Strategic Objective</span>
+                <h1>What is your <br><span class="serif-text">Primary Goal?</span></h1>
+                <p class="sub-header">Identify the most critical requirement for your infrastructure.</p>
+
+                <div class="selection-list">
+                    <div class="selection-item" onclick="selectOption(this, 'step2', 'Infrastructure')">
+                        <div class="selection-info">
+                            <h3>Data Consolidation</h3>
+                            <p>Unify fragmented spreadsheets into a single source of truth.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step2', 'Performance')">
+                        <div class="selection-info">
+                            <h3>KPI Monitoring</h3>
+                            <p>Real-time department accountability and performance metrics.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step2', 'Report')">
+                        <div class="selection-info">
+                            <h3>Board-Ready Reporting</h3>
+                            <p>Automated, executive-ready documentation for governance.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn" style="background: none; color: white;" onclick="prevStep(1)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Continue to Implementation →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Tier -->
+            <div class="step" id="step3">
+                <span class="step-label">Implementation Scope</span>
+                <h1>Implementation <br><span class="serif-text">Intensity.</span></h1>
+                <p class="sub-header">Select the level of intelligence required for your operations.</p>
+
+                <div class="selection-list">
+                    <div class="selection-item" onclick="selectOption(this, 'step3', 'Standard', 299)">
+                        <div class="selection-info">
+                            <h3>Standard Infrastructure</h3>
+                            <p>Foundational live connection for Core Finance & Ops.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step3', 'Advanced', 499)">
+                        <div class="selection-info">
+                            <h3>Advanced Intelligence</h3>
+                            <p>Predictive commercial modelling and risk forecasting.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                    <div class="selection-item" onclick="selectOption(this, 'step3', 'Executive', 699)">
+                        <div class="selection-info">
+                            <h3>Strategic Suite</h3>
+                            <p>Full 360° visibility with bespoke board-ready governance.</p>
+                        </div>
+                        <div class="selection-check"></div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn" style="background: none; color: white;" onclick="prevStep(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="calculateQuote()">Review Indicative Cost →</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Final -->
+            <div class="step" id="step4">
+                <span class="step-label">Performance Ready</span>
+                <h1>Indicative <br><span class="serif-text">Quote.</span></h1>
+                <p class="sub-header">Based on your strategic objectives, your monthly subscription cost is:</p>
+
+                <div class="price-badge" id="final-price">£499</div>
+                <p
+                    style="text-transform: uppercase; letter-spacing: 0.2em; color: var(--brand-blue); font-weight: 700; margin-bottom: 3rem;">
+                    + VAT / Per Month</p>
+
+                <div style="max-width: 500px;">
+                    <form id="lead-form">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Corporate Email Address" required>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Finalise
+                            Strategy Session</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        let userData = { step1: null, step2: null, step3: null, price: 699 };
+
+        function selectOption(element, step, value, price = null) {
+            const container = element.parentElement;
+            container.querySelectorAll('.selection-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            userData[step] = value;
+            if (price) userData.price = price;
+        }
+
+        function nextStep(step) {
+            const currentStepId = 'step' + (step - 1);
+            if (!userData[currentStepId]) { alert("Please make a selection to proceed."); return; }
+
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            document.getElementById('progress').style.width = (step / 4) * 100 + '%';
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            document.getElementById('progress').style.width = (step / 4) * 100 + '%';
+        }
+
+        function calculateQuote() {
+            if (!userData.step3) { alert("Please select an implementation tier."); return; }
+            document.getElementById('final-price').innerText = '£' + userData.price;
+            nextStep(4);
+        }
+
+        document.getElementById('lead-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            window.location.href = 'index.html?completed=true';
+        });
+    </script>
+</body>
+
+</html>

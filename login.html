@@ -12,15 +12,12 @@
     <style>
         :root {
             --brand-dark: #21293B;
+            --brand-blue: #4697C1;
             --brand-white: #F9FAFA;
-            --brand-blue-1: #5798CA;
-            --brand-blue-2: #455972;
-            --brand-blue-3: #54A5CE;
-
-            --bg-body: #F8FAFC;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
-            --border-color: #E2E8F0;
+            --font-heading: 'Roboto', sans-serif;
+            --font-serif: 'Newsreader', serif;
+            --bg-body: #0A0F1A;
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -30,9 +27,9 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-heading);
             background-color: var(--bg-body);
-            color: var(--text-main);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -41,101 +38,118 @@
         }
 
         .login-card {
-            background: white;
+            background: var(--brand-dark);
             width: 100%;
-            max-width: 400px;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            max-width: 440px;
+            padding: 4rem;
+            border-radius: 32px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
             text-align: center;
+            border: 1px solid var(--border-color);
         }
 
         .logo {
-            max-width: 180px;
-            margin-bottom: 32px;
+            height: 24px;
+            margin-bottom: 3rem;
+            opacity: 0.9;
         }
 
         h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--brand-dark);
-            margin-bottom: 8px;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .serif-text {
+            font-family: var(--font-serif);
+            font-style: normal;
+            font-weight: 400;
+            color: var(--brand-blue);
         }
 
         p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 32px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
         }
 
         .form-group {
             text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--brand-dark);
-            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--brand-blue);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
         }
 
         input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            font-size: 14px;
-            transition: all 0.2s;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.3s;
             outline: none;
         }
 
         input:focus {
-            border-color: var(--brand-blue-3);
-            box-shadow: 0 0 0 4px rgba(84, 165, 206, 0.1);
+            border-color: var(--brand-blue);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .btn-login {
             width: 100%;
-            background: var(--brand-blue-3);
+            background: var(--brand-blue);
             color: white;
             border: none;
-            padding: 14px;
+            padding: 1.1rem;
             border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 12px;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .btn-login:hover {
-            background: var(--brand-blue-1);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(70, 151, 193, 0.2);
         }
 
         .error-message {
-            color: #EF4444;
-            font-size: 13px;
-            margin-top: 16px;
+            color: #ff4b4b;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
             display: none;
+            background: rgba(255, 75, 75, 0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
         }
 
         .footer-links {
-            margin-top: 32px;
-            font-size: 13px;
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
         }
 
         .footer-links a {
-            color: var(--brand-blue-3);
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
-            font-weight: 500;
+            transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            text-decoration: underline;
+            color: var(--brand-blue);
         }
     </style>
 </head>
@@ -143,25 +157,27 @@
 <body>
 
     <div class="login-card">
-        <img src="clariview_logo.png" alt="ClariView Logo" class="logo">
-        <h1>Welcome Back</h1>
-        <p>Please enter your details to sign in.</p>
+        <a href="index.html">
+            <img src="assets/logo-split-light-text-md.png" alt="ClariView Logo" class="logo">
+        </a>
+        <h1>Access Your <br><span class="serif-text">Intelligence.</span></h1>
+        <p>Enter your credentials to access your executive workspace.</p>
 
         <form id="loginForm">
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="1@2.com" required>
+                <label for="email">Corporate Email</label>
+                <input type="email" id="email" placeholder="name@organisation.com" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="••••••••" required>
             </div>
             <button type="submit" class="btn-login">Sign In</button>
-            <div id="error" class="error-message">Invalid email or password.</div>
+            <div id="error" class="error-message">Invalid credentials. Please contact your administrator.</div>
         </form>
 
         <div class="footer-links">
-            <a href="#">Forgot password?</a>
+            <a href="#">Security & Access Support</a>
         </div>
     </div>
 
