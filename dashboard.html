@@ -1,32 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClariView Dashboard | Intelligence at a Glance</title>
+    <title>ClariView Executive | Global Football Operations</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap" rel="stylesheet">
+    
+    <!-- Icons & Charts -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         :root {
-            --brand-dark: #21293B;
-            --brand-white: #F9FAFA;
-            --brand-blue-1: #5798CA;
-            --brand-blue-2: #455972;
-            --brand-blue-3: #54A5CE;
-            --brand-accent: #4F46E5;
-            --bg-body: #F3F4F6;
-            --sidebar-bg: #FFFFFF;
-            --text-main: #111827;
-            --text-muted: #6B7280;
-            --border-color: #E5E7EB;
-            --radius-lg: 12px;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* Premium Executive Dark Theme */
+            --bg-base: #0B0E14;
+            --bg-surface: #151A23;
+            --bg-card: rgba(26, 33, 45, 0.6);
+            --border-glow: rgba(70, 151, 193, 0.15);
+            --border-light: rgba(255, 255, 255, 0.06);
+            
+            --brand-blue: #4697C1;
+            --brand-gold: #D4AF37;
+            --text-main: #F9FAFA;
+            --text-muted: #94A3B8;
+            
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+
+            --font-ui: 'Roboto', sans-serif;
+            --font-serif: 'Newsreader', serif;
+            
+            --radius-lg: 20px;
+            --radius-md: 12px;
         }
 
         * {
@@ -36,1063 +47,586 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
+            font-family: var(--font-ui);
+            background-color: var(--bg-base);
             color: var(--text-main);
             display: flex;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 15% 50%, rgba(70, 151, 193, 0.05), transparent 40%),
+                              radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.03), transparent 40%);
         }
 
-        /* Sidebar */
+        /* Glass Sidebar */
         .sidebar {
-            width: 260px;
-            background: white;
-            border-right: 1px solid var(--border-color);
+            width: 270px;
+            background: rgba(11, 14, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-light);
             display: flex;
             flex-direction: column;
-            padding: 24px 0;
+            padding: 32px 0;
             position: fixed;
             height: 100vh;
             z-index: 100;
         }
 
         .logo-container {
-            padding: 0 24px 32px;
+            padding: 0 32px 40px;
         }
 
         .logo-container img {
-            height: 60px;
+            height: 28px;
             display: block;
-            width: auto;
         }
 
         .nav-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            color: var(--text-muted);
+            color: var(--brand-blue);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 24px 24px 8px;
+            letter-spacing: 0.2em;
+            padding: 24px 32px 12px;
+            opacity: 0.8;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 14px 24px;
+            padding: 14px 32px;
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
             border-left: 3px solid transparent;
         }
 
-        .nav-item i,
-        .nav-item svg {
-            margin-right: 14px;
-            width: 20px !important;
-            height: 20px !important;
-            min-width: 20px;
+        .nav-item i {
+            margin-right: 16px;
+            width: 18px !important;
+            height: 18px !important;
+            opacity: 0.7;
+            transition: all 0.3s ease;
         }
 
         .nav-item:hover {
-            color: var(--brand-accent);
-            background: #f8fafc;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-item:hover i {
+            opacity: 1;
+            color: var(--brand-blue);
         }
 
         .nav-item.active {
-            color: var(--brand-accent);
-            background: #f0f4ff;
-            border-left-color: var(--brand-accent);
-            font-weight: 600;
+            color: var(--text-main);
+            background: linear-gradient(90deg, rgba(70, 151, 193, 0.1) 0%, transparent 100%);
+            border-left-color: var(--brand-blue);
+            font-weight: 500;
+        }
+
+        .nav-item.active i {
+            opacity: 1;
+            color: var(--brand-blue);
         }
 
         .user-profile {
             margin-top: auto;
-            padding: 16px 24px;
-            border-top: 1px solid var(--border-color);
+            padding: 24px 32px;
+            border-top: 1px solid var(--border-light);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: var(--brand-accent);
-            color: white;
+            background: linear-gradient(135deg, var(--brand-blue), #2A5A73);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 0 20px rgba(70, 151, 193, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            margin-left: 260px;
-            display: flex;
-            flex-direction: column;
-            width: calc(100% - 260px);
+            margin-left: 270px;
+            width: calc(100% - 270px);
+            padding: 40px 48px;
         }
 
         header {
-            height: 64px;
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0 24px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 90;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+            align-items: flex-end;
+            margin-bottom: 40px;
         }
 
         .page-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            font-size: 13px;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             font-weight: 700;
-            color: var(--brand-dark);
-            cursor: pointer;
+            margin-bottom: 8px;
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-ghost {
-            padding: 8px;
-            border-radius: 8px;
-            color: var(--text-muted);
-            cursor: pointer;
-            border: 1px solid transparent;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-ghost:hover {
-            background: #f3f4f6;
-            color: var(--brand-dark);
-        }
-
-        .btn-outline {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: white;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--brand-accent);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        /* Filter Bar */
-        .filter-bar {
-            height: 56px;
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .filters-group {
+        .date-picker {
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .filter-pill {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
             padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: #f9fafb;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            color: var(--text-main);
             cursor: pointer;
-            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
-        .filter-pill:hover {
-            border-color: var(--brand-accent);
-            background: white;
+        .date-picker:hover {
+            border-color: var(--brand-blue);
+            background: rgba(26, 33, 45, 0.8);
         }
 
-        .filter-pill.active {
-            border-color: var(--brand-accent);
-            background: white;
-            box-shadow: 0 0 0 1px var(--brand-accent);
-        }
-
-        /* Content Body */
-        .content-body {
-            padding: 24px;
-            display: none;
-        }
-
-        .content-body.active {
-            display: block;
-        }
-
-        .view-section {
-            display: none;
-        }
-
-        .view-section.active {
-            display: block;
-        }
-
-        /* KPI Cards */
+        /* KPI Grid */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 24px;
+            margin-bottom: 32px;
         }
 
-        .kpi-card {
-            background: white;
-            padding: 24px;
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            text-align: center;
+            padding: 28px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .kpi-label {
-            font-size: 11px;
-            font-weight: 700;
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(70, 151, 193, 0.05);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .kpi-title {
+            font-size: 12px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .kpi-icon {
+            color: var(--brand-blue);
+            opacity: 0.8;
         }
 
         .kpi-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 64px;
-            font-weight: 700;
-            color: var(--brand-accent);
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 400;
+            color: var(--text-main);
             line-height: 1;
+            margin-bottom: 12px;
         }
 
-        /* Charts Grid */
+        .kpi-trend {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .trend-up { color: var(--success); }
+        .trend-down { color: var(--danger); }
+        .trend-neutral { color: var(--warning); }
+
+        /* Chart Section */
         .charts-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
-        .card {
-            background: white;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            padding: 20px;
+        .chart-card {
+            grid-column: span 2;
+        }
+
+        .side-card {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
         .card-header {
-            padding-bottom: 16px;
-            border-bottom: 1px solid #f3f4f6;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 24px;
         }
 
         .card-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .list-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .list-label {
             font-size: 14px;
-            font-weight: 700;
-            color: var(--brand-dark);
+            color: var(--text-muted);
         }
 
-        .chart-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .card-full {
-            grid-column: span 12;
-        }
-
-        .card-half {
-            grid-column: span 6;
-        }
-
-        .card-third {
-            grid-column: span 4;
-        }
-
-        /* Dropdowns */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 220px;
-            display: none;
-            z-index: 1000;
-            padding: 8px;
-        }
-
-        .dropdown-menu.active {
-            display: block;
-        }
-
-        .dropdown-item {
-            padding: 10px 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .dropdown-item:hover {
-            background: #f3f4f6;
-        }
-
-        .dropdown-item.selected {
-            font-weight: 700;
-            color: var(--brand-accent);
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #111827;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 14px;
+        .list-val {
             font-weight: 500;
-            transform: translateY(100px);
-            transition: 0.3s;
-            z-index: 10000;
+            font-family: var(--font-serif);
+            font-size: 16px;
         }
 
-        .toast.active {
-            transform: translateY(0);
+        /* Status Badge */
+        .badge {
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
+
+        .badge-success { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .badge-warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }
     </style>
 </head>
 
 <body>
+    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo-container">
             <a href="index.html">
-                <img src="assets/logo-lg.png" alt="ClariView Logo">
+                <img src="assets/logo-split-light-text-md.png" alt="ClariView Logo">
             </a>
         </div>
-        <nav id="sidebar-nav">
-            <div class="nav-label">Main</div>
-            <div class="nav-item active" data-tab="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</div>
-            <div class="nav-item" data-tab="library"><i data-lucide="folder"></i> Library</div>
-            <div class="nav-item" data-tab="builder"><i data-lucide="wrench"></i> Builder</div>
-            <div class="nav-item" data-tab="architect"><i data-lucide="component"></i> Architect</div>
+        
+        <div class="nav-label">Executive View</div>
+        <div class="nav-item active"><i data-lucide="layout-dashboard"></i> Group Overview</div>
+        <div class="nav-item"><i data-lucide="bar-chart-2"></i> Commercial Performance</div>
+        <div class="nav-item"><i data-lucide="activity"></i> Sporting / First Team</div>
+        <div class="nav-item"><i data-lucide="building"></i> Matchday Operations</div>
+        
+        <div class="nav-label">Intelligence</div>
+        <div class="nav-item"><i data-lucide="file-text"></i> Financial Board Pack</div>
+        <div class="nav-item"><i data-lucide="globe"></i> Global Fan Engagement</div>
+        <div class="nav-item"><i data-lucide="target"></i> Wage/Turnover Ratios</div>
 
-            <div class="nav-label">Account</div>
-            <div class="nav-item" data-tab="settings"><i data-lucide="settings"></i> Settings</div>
-            <div class="nav-item" data-tab="schedule"><i data-lucide="calendar"></i> Schedule</div>
-            <div class="nav-item" data-tab="support"><i data-lucide="help-circle"></i> Support</div>
-        </nav>
-        <div class="user-profile dropdown">
-            <div id="profile-trigger" style="display: flex; align-items: center; gap: 12px; width: 100%;"
-                onclick="toggleDropdown('profile-dd')">
-                <div class="avatar">DF</div>
-                <div style="flex: 1;">
-                    <p style="font-size: 13px; font-weight: 600;">David Ferguson</p>
-                    <p style="font-size: 11px; color: var(--text-muted);">Admin</p>
-                </div>
-                <i data-lucide="more-vertical" style="width: 14px; color: var(--text-muted);"></i>
-            </div>
-            <div id="profile-dd" class="dropdown-menu"
-                style="bottom: 100%; top: auto; left: 24px; width: calc(100% - 48px); margin-bottom: 8px;">
-                <div class="dropdown-item" onclick="switchView('Admin Central')"><i data-lucide="shield"
-                        style="width:14px; display:inline; margin-right:8px;"></i> Admin Central</div>
-                <div class="dropdown-item" onclick="switchView('Account Details')"><i data-lucide="user"
-                        style="width:14px; display:inline; margin-right:8px;"></i> Account Details</div>
-                <div style="height: 1px; background: var(--border-color); margin: 4px 0;"></div>
-                <div class="dropdown-item" style="color: #ef4444;" onclick="logout()"><i data-lucide="log-out"
-                        style="width:14px; display:inline; margin-right:8px;"></i> Log Out</div>
+        <div class="user-profile">
+            <div class="avatar">CEO</div>
+            <div>
+                <p style="font-size: 13px; font-weight: 500; color: var(--text-main);">Executive Dashboard</p>
+                <p style="font-size: 11px; color: var(--brand-blue); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px;">Liverpool FC</p>
             </div>
         </div>
     </aside>
 
+    <!-- Main Content -->
     <main class="main-content">
         <header>
-            <div class="header-left">
-                <div class="dropdown" id="dash-title-dropdown">
-                    <div class="page-title" id="view-title" onclick="toggleDropdown('title-dd')">
-                        Service Desk Status <i data-lucide="chevron-down" style="width: 16px;"></i>
-                    </div>
-                    <div id="title-dd" class="dropdown-menu">
-                        <div class="dropdown-item selected" onclick="switchView('Service Desk Status')">Service Desk
-                            Status</div>
-                        <div class="dropdown-item" onclick="switchView('Service Desk Trends')">Service Desk Trends</div>
-                        <div class="dropdown-item" onclick="switchView('Sales Pipeline')">Sales Pipeline</div>
-                    </div>
-                </div>
+            <div>
+                <div class="page-subtitle">Consolidated Group Metrics</div>
+                <h1 class="page-title">Chief Executive Overview</h1>
             </div>
-            <div class="header-actions">
-                <div class="btn-ghost" onclick="refreshData()"><i data-lucide="rotate-cw" style="width: 18px;"></i>
-                </div>
-                <div class="btn-ghost"><i data-lucide="settings" style="width: 18px;"></i></div>
-                <button class="btn-outline"><i data-lucide="share-2" style="width: 14px;"></i> Share</button>
-                <button class="btn-primary" onclick="showToast('Widget added')"><i data-lucide="plus"></i> New
-                    Widget</button>
+            <div class="date-picker">
+                <i data-lucide="calendar" style="width: 14px; opacity: 0.6;"></i>
+                <span>FY 25/26 - Q3 (Current)</span>
+                <i data-lucide="chevron-down" style="width: 14px; opacity: 0.6;"></i>
             </div>
         </header>
 
-        <!-- DASHBOARD CONTENT -->
-        <div id="dashboard-content" class="content-body active">
-            <!-- COMMON FILTER BAR -->
-            <div class="filter-bar"
-                style="margin-bottom: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
-                <div class="filters-group">
-                    <div class="dropdown">
-                        <div id="filter-channel" class="filter-pill" onclick="toggleDropdown('filter-channel-dd')">
-                            Channel: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
-                        </div>
-                        <div id="filter-channel-dd" class="dropdown-menu">
-                            <div class="dropdown-item selected" onclick="selectFilter('channel', 'All')">All Channels
-                            </div>
-                            <div class="dropdown-item" onclick="selectFilter('channel', 'Phone')">Phone</div>
-                            <div class="dropdown-item" onclick="selectFilter('channel', 'Email')">Email</div>
-                            <div class="dropdown-item" onclick="selectFilter('channel', 'Chat')">Chat</div>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <div id="filter-fault" class="filter-pill" onclick="toggleDropdown('filter-fault-dd')">
-                            Fault Type: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
-                        </div>
-                        <div id="filter-fault-dd" class="dropdown-menu">
-                            <div class="dropdown-item selected" onclick="selectFilter('fault', 'All')">All Faults</div>
-                            <div class="dropdown-item" onclick="selectFilter('fault', 'Hardware')">Hardware</div>
-                            <div class="dropdown-item" onclick="selectFilter('fault', 'Software')">Software</div>
-                            <div class="dropdown-item" onclick="selectFilter('fault', 'Network')">Network</div>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <div id="filter-customer" class="filter-pill" onclick="toggleDropdown('filter-customer-dd')">
-                            Customer: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
-                        </div>
-                        <div id="filter-customer-dd" class="dropdown-menu">
-                            <div class="dropdown-item selected" onclick="selectFilter('customer', 'All')">All Customers
-                            </div>
-                            <div class="dropdown-item" onclick="selectFilter('customer', 'Enterprise')">Enterprise</div>
-                            <div class="dropdown-item" onclick="selectFilter('customer', 'SMB')">SMB</div>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <div id="filter-assignee" class="filter-pill" onclick="toggleDropdown('filter-assignee-dd')">
-                            Assignee: <span class="val">All</span> <i data-lucide="chevron-down"
-                                style="width: 12px;"></i>
-                        </div>
-                        <div id="filter-assignee-dd" class="dropdown-menu">
-                            <div class="dropdown-item selected" onclick="selectFilter('assignee', 'All')">All Assignees
-                            </div>
-                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Milhouse')">Milhouse</div>
-                            <div class="dropdown-item" onclick="selectFilter('assignee', 'Bart')">Bart</div>
-                        </div>
-                    </div>
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+            <!-- Commercial Rev -->
+            <div class="glass-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Commercial Revenue</span>
+                    <i data-lucide="pound-sterling" class="kpi-icon" style="width: 18px;"></i>
                 </div>
-                <div class="filters-group">
-                    <button class="btn-outline" style="border: none; font-size: 12px;"><i data-lucide="filter"
-                            style="width:12px;"></i> More Filters</button>
-                    <button class="btn-ghost" onclick="showToast('Weekly view selected')">Weekly View</button>
-                    <button class="btn-ghost" onclick="showToast('Reviews opened')">Reviews</button>
+                <div class="kpi-value">£241.5m</div>
+                <div class="kpi-trend trend-up">
+                    <i data-lucide="trending-up" style="width: 14px;"></i>
+                    <span>+12.4% vs FY24</span>
                 </div>
             </div>
 
-            <!-- VIEW: SERVICE DESK STATUS (8 KPIs) -->
-            <div id="view-status" class="view-section active">
-                <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr);">
-                    <div class="kpi-card">
-                        <div class="kpi-label">Tickets Open Today</div>
-                        <div class="kpi-value" id="kpi-open">7</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Unresolved Tickets</div>
-                        <div class="kpi-value" id="kpi-unresolved">14</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Active SLA Violations</div>
-                        <div class="kpi-value" id="kpi-sla">13</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Total Active Tickets</div>
-                        <div class="kpi-value" id="kpi-total">569</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Avg Response Time</div>
-                        <div class="kpi-value" style="color:#6366f1">4.56</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Mean Time To Repair</div>
-                        <div class="kpi-value" style="color:#6366f1">149.34</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Backlog %</div>
-                        <div class="kpi-value" style="color:#6366f1">71%</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Most Open Tickets</div>
-                        <div class="kpi-value" style="color:#6366f1; font-size: 32px; padding-top: 15px;">Milhouse</div>
-                    </div>
+            <!-- Wages to Turnover -->
+            <div class="glass-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Wages/Turnover Ratio</span>
+                    <i data-lucide="pie-chart" class="kpi-icon" style="width: 18px;"></i>
                 </div>
-                <div class="charts-grid">
-                    <div class="card card-full">
-                        <div class="card-header">
-                            <h3 class="card-title">Team Performance - Response Times</h3>
-                        </div>
-                        <div class="chart-container" style="height: 400px;"><canvas id="statusResChart"></canvas></div>
-                    </div>
+                <div class="kpi-value">58.4%</div>
+                <div class="kpi-trend trend-up">
+                    <i data-lucide="check-circle" style="width: 14px;"></i>
+                    <span>Within UEFA 70% Limit</span>
                 </div>
             </div>
 
-            <!-- VIEW: SERVICE DESK TRENDS (6 Charts) -->
-            <div id="view-trends" class="view-section">
-                <div class="charts-grid">
-                    <div class="card card-full">
-                        <div class="card-header">
-                            <h3 class="card-title">Tickets Last 30 Days</h3>
-                        </div>
-                        <div class="chart-container" style="height: 350px;"><canvas id="trendsLineChart"></canvas></div>
-                    </div>
-                    <div class="card card-half">
-                        <div class="card-header">
-                            <h3 class="card-title">Status By Day of Week</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsStatusChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-half">
-                        <div class="card-header">
-                            <h3 class="card-title">Resolution Time Histogram</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsHistChart"></canvas></div>
-                    </div>
-                    <div class="card card-third">
-                        <div class="card-header">
-                            <h3 class="card-title">Tickets by Channel</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsChannelChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-third">
-                        <div class="card-header">
-                            <h3 class="card-title">Top 10 Customers</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsCustomerChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-third">
-                        <div class="card-header">
-                            <h3 class="card-title">Fault Types</h3>
-                        </div>
-                        <div class="chart-container" style="height: 250px;"><canvas id="trendsFaultChart"></canvas>
-                        </div>
-                    </div>
+            <!-- Matchday Occupancy -->
+            <div class="glass-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Hospitality Occupancy</span>
+                    <i data-lucide="ticket" class="kpi-icon" style="width: 18px;"></i>
+                </div>
+                <div class="kpi-value">99.2%</div>
+                <div class="kpi-trend trend-neutral">
+                    <i data-lucide="minus" style="width: 14px;"></i>
+                    <span>Consistent vs Projected</span>
                 </div>
             </div>
 
-            <!-- VIEW: SALES PIPELINE -->
-            <div id="view-sales" class="view-section">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-label">YTD Revenue</div>
-                        <div class="kpi-value">$2.4M</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Active Deals</div>
-                        <div class="kpi-value">142</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Win Rate</div>
-                        <div class="kpi-value">64%</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Qualified Leads</div>
-                        <div class="kpi-value">891</div>
-                    </div>
+            <!-- Global Retail YTD -->
+            <div class="glass-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Global DTC Retail</span>
+                    <i data-lucide="shopping-bag" class="kpi-icon" style="width: 18px;"></i>
                 </div>
-                <div class="charts-grid">
-                    <div class="card card-full">
-                        <div class="card-header">
-                            <h3 class="card-title">Revenue By Rep - YTD</h3>
-                        </div>
-                        <div class="chart-container" style="height: 400px;"><canvas id="salesRepChart"></canvas></div>
-                    </div>
+                <div class="kpi-value">£68.1m</div>
+                <div class="kpi-trend trend-up">
+                    <i data-lucide="trending-up" style="width: 14px;"></i>
+                    <span>+18% (APAC Region Surge)</span>
                 </div>
             </div>
         </div>
 
-        <!-- OTHER CONTENT SECTIONS -->
-        <div id="library-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="folder-open"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Asset Library</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Manage and view your organization's collective
-                    intelligence documents.</p>
-                <div style="margin-top: 32px; display: flex; gap: 16px;">
-                    <button class="btn-primary">Upload Documentation</button>
-                    <button class="btn-outline">View Recent</button>
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <!-- Main Revenue Chart -->
+            <div class="glass-card chart-card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 class="card-title">Group Revenue Trajectory (Rolling 12M)</h2>
+                    <span class="badge badge-success">On Target £640m</span>
+                </div>
+                <div style="height: 320px; width: 100%;">
+                    <canvas id="revenueChart"></canvas>
                 </div>
             </div>
-        </div>
 
-        <div id="builder-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="wrench"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Widget Builder</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Craft new data visualizations and logic modules
-                    for your workspace.</p>
-                <button class="btn-primary" style="margin-top: 32px;">Launch Component Studio</button>
-            </div>
-        </div>
-
-        <div id="architect-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="component"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Data Architect</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Map and structure your intelligence pathways and
-                    source integrations.</p>
-                <button class="btn-primary" style="margin-top: 32px;">Manage Integrations</button>
-            </div>
-        </div>
-
-        <div id="settings-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="building-2"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Organization Settings</h1>
-                <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 32px;">Configure your global
-                    workspace properties and enterprise branding.</p>
-                <div
-                    style="max-width: 400px; width: 100%; text-align: left; display: flex; flex-direction: column; gap: 20px;">
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label style="font-size: 13px; font-weight: 600;">Organization Name</label>
-                        <input type="text" value="ClariView Global"
-                            style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f9fafb;">
+            <!-- Operations & Risk Panel -->
+            <div class="side-card">
+                <!-- Exec Summary -->
+                <div class="glass-card" style="flex: 1;">
+                    <div class="card-header">
+                        <h2 class="card-title">Commercial Pipelines</h2>
                     </div>
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label style="font-size: 13px; font-weight: 600;">Branding Color</label>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <div style="width: 32px; height: 32px; background: #4F46E5; border-radius: 6px;"></div>
-                            <span style="font-size: 13px; color: var(--text-muted);">Indigo (#4F46E5)</span>
+                    <div class="list-group">
+                        <div class="list-item">
+                            <span class="list-label">Sleeve Sponsorship Renewal</span>
+                            <span class="badge badge-warning">Negotiation</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-label">Pre-Season Tour '26 (US)</span>
+                            <span class="badge badge-success">Finalized</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-label">Stadium Expansion Phase 2</span>
+                            <span class="list-val">£8.2m Capex</span>
                         </div>
                     </div>
-                    <button class="btn-primary">Save Organization Settings</button>
                 </div>
-            </div>
-        </div>
 
-        <div id="admin-central-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="shield-check"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Admin Central</h1>
-                <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 32px;">System-wide infrastructure
-                    management, security audits, and API control.</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; width: 100%;">
-                    <div class="card" style="text-align: left;">
-                        <h4 style="margin-bottom:8px;">User Management</h4>
-                        <p style="font-size:12px; color:var(--text-muted);">Manage team permissions and access roles.
-                        </p>
+                <!-- Squad Overview -->
+                <div class="glass-card" style="flex: 1;">
+                    <div class="card-header">
+                        <h2 class="card-title">Sporting Overview</h2>
                     </div>
-                    <div class="card" style="text-align: left;">
-                        <h4 style="margin-bottom:8px;">API Tokens</h4>
-                        <p style="font-size:12px; color:var(--text-muted);">Generate and revoke secure data access keys.
-                        </p>
+                    <div class="list-group">
+                        <div class="list-item">
+                            <span class="list-label">First Team Availability</span>
+                            <span class="list-val" style="color: var(--success);">88%</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-label">Academy Transition KPIs</span>
+                            <span class="list-val">4 Debuts</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-label">Upcoming Window Budget</span>
+                            <span class="badge badge-success">Approved</span>
+                        </div>
                     </div>
-                    <div class="card" style="text-align: left;">
-                        <h4 style="margin-bottom:8px;">System Logs</h4>
-                        <p style="font-size:12px; color:var(--text-muted);">Track real-time data flow and error audits.
-                        </p>
-                    </div>
-                    <div class="card" style="text-align: left;">
-                        <h4 style="margin-bottom:8px;">Security</h4>
-                        <p style="font-size:12px; color:var(--text-muted);">Configure 2FA and encryption protocols.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="account-details-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <div class="avatar" style="width: 80px; height: 80px; font-size: 32px; margin-bottom: 24px;">DF</div>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 4px;">David Ferguson</h1>
-                <p style="color: var(--text-muted); margin-bottom: 32px;">System Administrator</p>
-                <div
-                    style="max-width: 400px; width: 100%; text-align: left; display: flex; flex-direction: column; gap: 20px;">
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label style="font-size: 13px; font-weight: 600;">Personal Email</label>
-                        <input type="email" value="david.f@clariview.ai"
-                            style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f9fafb;">
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label style="font-size: 13px; font-weight: 600;">Change Password</label>
-                        <input type="password" placeholder="••••••••"
-                            style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f9fafb;">
-                    </div>
-                    <button class="btn-primary">Save Personal Profile</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="schedule-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="calendar"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">Intelligence Schedule</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Plan and automate your report generation and data
-                    refresh cycles.</p>
-                <button class="btn-outline" style="margin-top: 32px;"><i data-lucide="plus" style="width: 14px;"></i>
-                    New Scheduled Task</button>
-            </div>
-        </div>
-
-        <div id="support-content" class="content-body" style="padding: 0;">
-            <div
-                style="background: white; margin: 24px; border-radius: 12px; height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--border-color);">
-                <i data-lucide="help-circle"
-                    style="width: 64px; height: 64px; color: var(--brand-accent); margin-bottom: 24px;"></i>
-                <h1 style="font-family: Outfit; font-size: 32px; margin-bottom: 12px;">ClariView Support</h1>
-                <p style="color: var(--text-muted); max-width: 500px;">Need help? Our intelligence experts are here to
-                    assist with your configuration.</p>
-                <div style="margin-top: 32px; display: flex; gap: 16px;">
-                    <button class="btn-primary">Contact Expert</button>
-                    <button class="btn-outline">Documentation</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <div id="toast" class="toast">Action successful</div>
-
+    <!-- Init Lucide Icons -->
     <script>
         lucide.createIcons();
-        let charts = {};
 
-        function initCharts() {
-            // STATUS RESOLUTION
-            const statusCtx = document.getElementById('statusResChart').getContext('2d');
-            charts.status = new Chart(statusCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F', 'Team G'],
-                    datasets: [{ label: 'Resolution Time', data: [137, 143, 142, 151, 157, 154, 155], backgroundColor: '#38bdf8', borderRadius: 4 }]
+        // Chart.js Premium Dark Theme Configuration
+        Chart.defaults.color = '#94A3B8';
+        Chart.defaults.font.family = "'Roboto', sans-serif";
+        
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        
+        // Gradient for Broadcast Revenue
+        const gradientBroadcast = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientBroadcast.addColorStop(0, 'rgba(70, 151, 193, 0.4)');
+        gradientBroadcast.addColorStop(1, 'rgba(70, 151, 193, 0.0)');
+
+        // Gradient for Commercial Revenue
+        const gradientCommercial = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientCommercial.addColorStop(0, 'rgba(212, 175, 55, 0.4)');
+        gradientCommercial.addColorStop(1, 'rgba(212, 175, 55, 0.0)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+                datasets: [
+                    {
+                        label: 'Commercial (£m)',
+                        data: [28, 32, 29, 45, 52, 28, 26, 30],
+                        borderColor: '#D4AF37',
+                        backgroundColor: gradientCommercial,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#151A23',
+                        pointBorderColor: '#D4AF37',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    },
+                    {
+                        label: 'Matchday & Broadcast (£m)',
+                        data: [15, 22, 28, 25, 34, 40, 35, 38],
+                        borderColor: '#4697C1',
+                        backgroundColor: gradientBroadcast,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#151A23',
+                        pointBorderColor: '#4697C1',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { title: { display: true, text: 'Time (Minutes)', font: { weight: 'bold' } } },
-                        x: { title: { display: true, text: 'Department / Team', font: { weight: 'bold' } } }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '£' + value + 'm';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(11, 14, 20, 0.9)',
+                        titleFont: { size: 13, family: "'Roboto', sans-serif" },
+                        bodyFont: { size: 14, family: "'Roboto', sans-serif", weight: 'bold' },
+                        padding: 12,
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': £' + context.parsed.y + 'm';
+                            }
+                        }
                     }
                 }
-            });
-
-            // TRENDS LINE
-            const trendsLineCtx = document.getElementById('trendsLineChart').getContext('2d');
-            charts.trendsLine = new Chart(trendsLineCtx, {
-                type: 'line',
-                data: {
-                    labels: Array.from({ length: 30 }, (_, i) => i + 1),
-                    datasets: [
-                        { label: 'Resolved', data: Array.from({ length: 30 }, () => Math.random() * 50 + 10), borderColor: '#ef4444', tension: 0.3, pointRadius: 0 },
-                        { label: 'Open', data: Array.from({ length: 30 }, () => Math.random() * 50 + 100), borderColor: '#22c55e', tension: 0.3, pointRadius: 0 },
-                        { label: 'Closed', data: Array.from({ length: 30 }, () => Math.random() * 100 + 200), borderColor: '#3b82f6', tension: 0.3, pointRadius: 0 }
-                    ]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { title: { display: true, text: 'Volume (Tickets)', font: { weight: 'bold' } } },
-                        x: { title: { display: true, text: 'Day of Month', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // TRENDS DOW (Stacked Bar)
-            const dowCtx = document.getElementById('trendsStatusChart').getContext('2d');
-            charts.trendsStatus = new Chart(dowCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    datasets: [
-                        { label: 'Closed', data: [800, 700, 650, 850, 950, 1000, 850], backgroundColor: '#3b82f6' },
-                        { label: 'Resolved', data: [50, 40, 30, 40, 50, 60, 40], backgroundColor: '#22c55e' }
-                    ]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { stacked: true, title: { display: true, text: 'Day of Week', font: { weight: 'bold' } } },
-                        y: { stacked: true, title: { display: true, text: 'Ticket Count', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // TRENDS HISTOGRAM
-            const histCtx = document.getElementById('trendsHistChart').getContext('2d');
-            charts.trendsHist = new Chart(histCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['<60m', '61-120m', '121-180m', '>180m'],
-                    datasets: [{ label: '# Tickets', data: [1800, 800, 900, 2200], backgroundColor: '#38bdf8' }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { title: { display: true, text: 'Total Tickets', font: { weight: 'bold' } } },
-                        x: { title: { display: true, text: 'Resolution Window', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // TRENDS CHANNEL
-            const channelCtx = document.getElementById('trendsChannelChart').getContext('2d');
-            charts.trendsChannel = new Chart(channelCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Phone', 'Chat', 'Email', 'Social'],
-                    datasets: [{ data: [900, 850, 800, 1700], backgroundColor: '#38bdf8' }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { title: { display: true, text: 'Ticket Count', font: { weight: 'bold' } } },
-                        y: { title: { display: true, text: 'Support Channel', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // TRENDS CUSTOMER
-            const customerCtx = document.getElementById('trendsCustomerChart').getContext('2d');
-            charts.trendsCustomer = new Chart(customerCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Cust A', 'Cust B', 'Cust C', 'Cust D', 'Cust E'],
-                    datasets: [{ data: [600, 400, 350, 300, 250], backgroundColor: '#38bdf8' }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { title: { display: true, text: 'Active Tickets', font: { weight: 'bold' } } },
-                        y: { title: { display: true, text: 'Top Customers', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // TRENDS FAULT
-            const faultCtx = document.getElementById('trendsFaultChart').getContext('2d');
-            charts.trendsFault = new Chart(faultCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['HW', 'SW', 'Net', 'Pwr', 'Other'],
-                    datasets: [{ data: [3000, 1500, 1000, 500, 200], backgroundColor: '#38bdf8' }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { title: { display: true, text: 'Incident Volume', font: { weight: 'bold' } } },
-                        y: { title: { display: true, text: 'Fault Category', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // SALES REP
-            const repCtx = document.getElementById('salesRepChart').getContext('2d');
-            charts.sales = new Chart(repCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Team 1', 'Team 2', 'Team 3', 'Team 4', 'Team 5'],
-                    datasets: [{ label: 'Revenue', data: [450000, 620000, 380000, 510000, 740000], backgroundColor: '#10B981', borderRadius: 6 }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { title: { display: true, text: 'Revenue (USD)', font: { weight: 'bold' } } },
-                        y: { title: { display: true, text: 'Sales Region', font: { weight: 'bold' } } }
-                    }
-                }
-            });
-        }
-
-        // NAVIGATION LOGIC
-        const navItems = document.querySelectorAll('.nav-item');
-        const contentSections = document.querySelectorAll('.content-body');
-        const viewTitle = document.getElementById('view-title');
-        const dashTitleDd = document.getElementById('dash-title-dropdown');
-
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const tab = item.getAttribute('data-tab');
-                navItems.forEach(ni => ni.classList.remove('active'));
-                item.classList.add('active');
-
-                contentSections.forEach(c => {
-                    c.classList.remove('active');
-                    if (c.id === `${tab}-content`) c.classList.add('active');
-                });
-
-                if (tab === 'dashboard') {
-                    dashTitleDd.style.visibility = 'visible';
-                } else {
-                    dashTitleDd.style.visibility = 'hidden';
-                }
-                showToast(`Navigated to ${item.innerText.trim()}`);
-            });
+            }
         });
-
-        // VIEW LOGIC
-        function switchView(view) {
-            document.getElementById('title-dd').classList.remove('active');
-            document.getElementById('profile-dd').classList.remove('active');
-            viewTitle.innerHTML = `${view} <i data-lucide="chevron-down" style="width: 16px;"></i>`;
-
-            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
-            if (view === 'Service Desk Status') document.getElementById('view-status').classList.add('active');
-            else if (view === 'Service Desk Trends') document.getElementById('view-trends').classList.add('active');
-            else if (view === 'Admin Central') {
-                navItems.forEach(ni => ni.classList.remove('active'));
-                contentSections.forEach(c => c.classList.remove('active'));
-                document.getElementById('admin-central-content').classList.add('active');
-                dashTitleDd.style.visibility = 'hidden';
-            }
-            else if (view === 'Account Details') {
-                navItems.forEach(ni => ni.classList.remove('active'));
-                contentSections.forEach(c => c.classList.remove('active'));
-                document.getElementById('account-details-content').classList.add('active');
-                dashTitleDd.style.visibility = 'hidden';
-            }
-            else document.getElementById('view-sales').classList.add('active');
-
-            document.querySelectorAll('.dropdown-item').forEach(item => {
-                item.classList.toggle('selected', item.innerText === view);
-            });
-            showToast(`${view}`);
-        }
-
-        function logout() {
-            showToast('Logging out...');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 800);
-        }
-
-        // FILTER LOGIC
-        function selectFilter(type, value) {
-            const pill = document.getElementById(`filter-${type}`);
-            pill.querySelector('.val').innerText = value;
-            value !== 'All' ? pill.classList.add('active') : pill.classList.remove('active');
-            document.getElementById(`filter-${type}-dd`).classList.remove('active');
-
-            // Trigger visual refresh
-            Object.values(charts).forEach(c => {
-                c.data.datasets.forEach(d => {
-                    if (d.data) d.data = d.data.map(v => Math.floor(v * (0.8 + Math.random() * 0.4)));
-                });
-                c.update();
-            });
-            showToast(`${type} set to ${value}`);
-        }
-
-        function toggleDropdown(id) {
-            document.querySelectorAll('.dropdown-menu').forEach(m => {
-                if (m.id !== id) m.classList.remove('active');
-            });
-            document.getElementById(id).classList.toggle('active');
-        }
-
-        function refreshData() {
-            showToast('Refreshing live intelligence feeds...');
-            initCharts();
-        }
-
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.innerText = msg;
-            t.classList.add('active');
-            setTimeout(() => t.classList.remove('active'), 3000);
-        }
-
-        window.onclick = (e) => {
-            if (!e.target.closest('.dropdown')) {
-                document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('active'));
-            }
-        };
-
-        window.onload = initCharts;
     </script>
 </body>
-
 </html>
